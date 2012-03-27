@@ -12,6 +12,7 @@
 #
 src_files:
     - sdk/sencha-touch-all.js
+    - test_app.js
     - app/**/*.js
 
 # stylesheets
@@ -71,4 +72,4 @@ src_dir: client/static
 #
 # spec_dir: spec/javascripts
 #
-spec_dir:
+spec_dir: spec/javascripts

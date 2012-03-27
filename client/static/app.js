@@ -12,7 +12,7 @@ Ext.application({
         'D.lib.Authentication'
     ],
     models: ['User', 'Friend', 'FBFriend'],
-    views: ['Main', 'FriendPicker'],
+    views: ['Main', 'FriendPicker', 'game.New'],
     controllers: ['Main', 'Game'],
 
     icon: {

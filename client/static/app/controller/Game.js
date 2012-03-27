@@ -36,7 +36,20 @@ Ext.define('D.controller.Game', {
         this.getMain().push(friendPicker);
     },
     create: function(list, record){
-        this.getMain().push({title: 'blah'});
-        console.log(record);
+        this.getMain().push(Ext.create('D.view.game.New'
+        ));
+        var canvas = document.getElementById('new-drawing-canvas');
+        var context = canvas.getContext('2d');
+        var drawingListener = Ext.get('new-drawing-listener')
+        drawingListener.addListener('dragstart', function(e, node){
+            console.log(e);
+            context.beginPath();
+            context.moveTo(e.pageX, e.pageY);
+        });
+        drawingListener.addListener('drag', function(e, node){
+            console.log(e);
+            context.lineTo(e.pageX, e.pageY);
+            context.stroke();
+        });
     }
 });
