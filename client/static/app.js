@@ -8,10 +8,12 @@ Ext.application({
     name: 'D',
 
     requires: [
-        'Ext.MessageBox'
+        'Ext.MessageBox',
+        'D.lib.Authentication'
     ],
-
-    views: ['Main'],
+    models: ['User', 'Friend', 'FBFriend'],
+    views: ['Main', 'FriendPicker'],
+    controllers: ['Main', 'Game'],
 
     icon: {
         57: 'resources/icons/Icon.png',
@@ -26,6 +28,9 @@ Ext.application({
     launch: function() {
         // Destroy the #appLoadingIndicator element
         Ext.fly('appLoadingIndicator').destroy();
+
+        // create an instance of the authentication
+        D.auth = Ext.create('D.lib.Authentication');
 
         // Initialize the main view
         Ext.Viewport.add(Ext.create('D.view.Main'));

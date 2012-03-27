@@ -1,7 +1,12 @@
 // My SocketStream app
 
-var http = require('http')
-  , ss = require('socketstream');
+var http = require('http'),
+    ss = require('socketstream'),
+    authenticate = require('./server/router/authenticate'),
+    mongoose = require('mongoose');
+
+//connect to the mongoose database
+mongoose.connect('mongodb://localhost/draw_dev');
 
 // Define a single-page client
 ss.client.define('main', {
@@ -11,10 +16,15 @@ ss.client.define('main', {
   tmpl: '*'
 });
 
+
+ss.http.router.on('/authenticate/facebook', authenticate.facebook.signedRequest);
+
 // Serve this client on the root URL
 ss.http.router.on('/', function(req, res) {
   res.serveClient('main');
 });
+
+ss.http.middleware.prepend(ss.http.connect.bodyParser());
 
 // Remove to use only plain .js, .html and .css files if you prefer
 ss.client.formatters.add(require('ss-coffee'));
