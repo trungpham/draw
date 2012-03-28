@@ -13,7 +13,7 @@
 src_files:
     - sdk/sencha-touch-all.js
     - test_app.js
-    - app/**/*.js
+    - app.js
 
 # stylesheets
 #

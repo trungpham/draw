@@ -11,7 +11,7 @@ Ext.application({
         'Ext.MessageBox',
         'D.lib.Authentication'
     ],
-    models: ['User', 'Friend', 'FBFriend'],
+    models: ['User', 'Friend', 'FBFriend', 'Drawing'],
     views: ['Main', 'FriendPicker', 'game.New'],
     controllers: ['Main', 'Game'],
 

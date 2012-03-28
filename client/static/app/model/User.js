@@ -10,7 +10,7 @@ Ext.define('D.model.User', {
         hasMany:{
             model:'D.model.Friend',
             name:'friends',
-            storeConfig:{
+            store:{
                 sorters:'lastName',
 
                 grouper:{
