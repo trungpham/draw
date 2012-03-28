@@ -9,25 +9,46 @@ describe('D.model.Drawing', function(){
         spyOn(fakeTime, 'getTime').andReturn(drawing.get('startTime')+10);
         spyOn(window, 'Date').andReturn(fakeTime);
     });
-    it('should add a stroke action', function(){
+    it('should add change pen color action', function(){
+        drawing.record({
+            action: 'penColor',
+            color: 'ffaacc'
+        });
+        expect(drawing.get('data')).toEqual([['penColor', 10, 'ffaacc']]);
+    });
+    it('should record pencil size change', function(){
+        drawing.record({
+            action: 'penSize',
+            size: 1
+        });
+        expect(drawing.get('data')).toEqual([['penSize', 10, 1]]);
+    });
+
+    it('should record erase size change', function(){
+        drawing.record({
+            action: 'eraseSize',
+            size: 1
+        });
+        expect(drawing.get('data')).toEqual([['eraseSize', 10, 1]]);
+    });
+
+    it('should add a pen action', function(){
 
         drawing.record({
-            action: 'stroke',
+            action: 'pen',
             startX: 0,
             startY: 1,
             endX: 2,
-            endY: 3,
-            size: 4,
-            color: 'ffaacc'
+            endY: 3
         });
-        expect(drawing.get('data')).toEqual([['s',10,0,1,2,3,4,'ffaacc']]);
+        expect(drawing.get('data')).toEqual([['p',10,0,1,2,3]]);
     });
     it('should add the clear action', function(){
         drawing.record({
             action: 'clear'
         });
 
-        expect(drawing.get('data')).toEqual([['c',10]]);
+        expect(drawing.get('data')).toEqual([['clear',10]]);
     });
     it('should add the erase action', function(){
         drawing.record({
@@ -35,9 +56,17 @@ describe('D.model.Drawing', function(){
             startX: 0,
             startY: 1,
             endX: 2,
-            endY: 3,
-            size: 1
+            endY: 3
         });
-        expect(drawing.get('data')).toEqual([['e',10,0,1,2,3,1]]);
+        expect(drawing.get('data')).toEqual([['e',10,0,1,2,3]]);
+    });
+
+    it('should add the dot action', function(){
+        drawing.record({
+            action: 'dot',
+            x: 1,
+            y: 2
+        });
+        expect(drawing.get('data')).toEqual([['d',10, 1, 2]]);
     });
 });

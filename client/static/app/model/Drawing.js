@@ -16,33 +16,64 @@ Ext.define('D.model.Drawing',{
      * record the user action on this drawing
      * @param {object} opts
      */
-    record: function(opts){
-        if (opts.action == 'stroke'){
-            this.get('data').push([
-                's',
-                this.calOffset(),
-                opts.startX,
-                opts.startY,
-                opts.endX,
-                opts.endY,
-                opts.size,
-                opts.color
-            ]);
-        }else if (opts.action == 'erase'){
-                    this.get('data').push([
-                        'e',
-                        this.calOffset(),
-                        opts.startX,
-                        opts.startY,
-                        opts.endX,
-                        opts.endY,
-                        opts.size
-                    ]);
-        }else if (opts.action == 'clear'){
-            this.get('data').push([
-                'c',
-                this.calOffset()
-            ]);
+    record:function (opts) {
+        switch (opts.action) {
+            case 'pen':
+                this.get('data').push([
+                    'p',
+                    this.calOffset(),
+                    opts.startX,
+                    opts.startY,
+                    opts.endX,
+                    opts.endY
+                ]);
+                break;
+            case 'dot':
+                this.get('data').push([
+                    'd',
+                    this.calOffset(),
+                    opts.x,
+                    opts.y
+                ]);
+                break;
+            case 'erase':
+                this.get('data').push([
+                    'e',
+                    this.calOffset(),
+                    opts.startX,
+                    opts.startY,
+                    opts.endX,
+                    opts.endY
+                ]);
+                break;
+            case 'clear':
+                this.get('data').push([
+                    'clear',
+                    this.calOffset()
+                ]);
+                break;
+            case 'penSize':
+                this.get('data').push([
+                    'penSize',
+                    this.calOffset(),
+                    opts.size
+                ]);
+                break;
+            case 'penColor':
+                this.get('data').push([
+                    'penColor',
+                    this.calOffset(),
+                    opts.color
+                ]);
+                break;
+            case 'eraseSize':
+                this.get('data').push([
+                    'eraseSize',
+                    this.calOffset(),
+                    opts.size
+                ]);
+                break;
+
         }
     },
     /**
