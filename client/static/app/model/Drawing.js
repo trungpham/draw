@@ -1,10 +1,34 @@
 Ext.define('D.model.Drawing',{
     extend: 'Ext.data.Model',
     config: {
-        fields: [{
-            name: 'startTime', type: 'int'},
-            {name: 'data', type: 'auto'
-        }]
+        fields: [
+            {
+                name: 'id', type: 'string'
+            },
+            {
+                name: 'createdTime', type: 'int'
+            },
+            {
+                name: 'data', type: 'auto'
+            }
+        ],
+        belongsTo:[
+            {
+                name: 'drawer', model: 'D.model.User'
+            },
+            {
+                name: 'game', model: 'D.model.Game'
+            },
+            {
+                name: 'word', model: 'D.model.Word'
+            }
+        ],
+        hasOne: [
+            {
+                name: 'guess', model: 'D.model.Guess'
+            }
+        ]
+
     },
     init: function(){
         if (!this.get('startTime')){
@@ -81,6 +105,6 @@ Ext.define('D.model.Drawing',{
      *  @return {number}
      */
     calOffset: function(){
-        return (new Date()).getTime() - this.get('startTime') || 0;
+        return (new Date()).getTime() - this.get('createdTime');
     }
 });

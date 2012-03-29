@@ -8,7 +8,7 @@ Ext.define('D.model.User', {
         ],
 
         hasMany:{
-            model:'D.model.Friend',
+            model:'D.model.ExternalFriend',
             name:'friends',
             store:{
                 sorters:'lastName',

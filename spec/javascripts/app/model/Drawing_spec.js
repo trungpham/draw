@@ -6,7 +6,7 @@ describe('D.model.Drawing', function(){
         });
 
         var fakeTime = (new Date());
-        spyOn(fakeTime, 'getTime').andReturn(drawing.get('startTime')+10);
+        spyOn(fakeTime, 'getTime').andReturn(drawing.get('createdTime')+10);
         spyOn(window, 'Date').andReturn(fakeTime);
     });
     it('should add change pen color action', function(){
