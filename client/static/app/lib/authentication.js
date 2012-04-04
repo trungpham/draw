@@ -20,7 +20,7 @@ Ext.define('D.lib.Authentication', {
                         params: response.authResponse
                         ,
                         success: function(data){
-                            _this.currentUser = Ext.create('D.model.User', data);
+                            _this.currentUser = Ext.create('D.model.User',  Ext.JSON.decode(data.responseText));
                             callback(_this.currentUser);
                             Ext.Viewport.setMasked(false);
 
