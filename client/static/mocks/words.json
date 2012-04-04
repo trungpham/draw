@@ -1,0 +1,19 @@
+[
+    {
+        id: 1,
+        value: 'test1',
+        difficulty: 'easy'
+    },
+
+    {
+        id: 2,
+        value: 'test2',
+        difficulty: 'medium'
+    },
+
+    {
+        id: 3,
+        value: 'test3',
+        difficulty: 'hard'
+    }
+]

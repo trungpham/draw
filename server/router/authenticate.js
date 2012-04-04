@@ -47,7 +47,7 @@ exports.facebook = {
 
                         console.log('user does not exist');
                     }else{
-
+                        res.setHeader('Content-Type', 'application/json');
                         res.end(JSON.stringify(user.toAuthableJSON()));
                     }
                   });

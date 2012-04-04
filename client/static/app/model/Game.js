@@ -10,11 +10,13 @@ Ext.define('D.model.Game', {
                 name: 'createdTime', type: 'integer'
             },{
                 name: 'nextAction', type: 'string', defaultValue: 'draw' //could be draw/guess
+            },{
+                name: 'drawings', persist: true
             }
         ],
         hasMany: [
             {
-            model: 'D.model.Drawing', name: 'drawings'
+            model: 'D.model.Drawing', name: 'drawings' , associationKey: 'drawings'
         },
             {model: 'D.model.User', name: 'users'} //users who are playing in this game
         ],
@@ -25,6 +27,12 @@ Ext.define('D.model.Game', {
             {
                 name: 'externalFriend', model: 'D.model.ExternalFriend' //the friend who was invited to play with
             }
-        ]
+        ],
+        proxy: {
+                type: 'rest',
+                url : 'mocks/games.json',
+                reader: 'json',
+                writer: Ext.create('D.lib.DeepJsonWriter')
+            }
     }
 });

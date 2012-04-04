@@ -10,6 +10,12 @@ Ext.define('D.model.Drawing',{
             },
             {
                 name: 'data', type: 'auto'
+            },
+            {
+                name: 'game_id'
+            },
+            {
+                name: 'word_id'
             }
         ],
         belongsTo:[
@@ -27,7 +33,13 @@ Ext.define('D.model.Drawing',{
             {
                 name: 'guess', model: 'D.model.Guess'
             }
-        ]
+        ],
+        proxy: {
+                type: 'rest',
+                url : 'mocks/drawings.json',
+            reader: 'json',
+            writer: 'json'
+            }
 
     },
     init: function(){

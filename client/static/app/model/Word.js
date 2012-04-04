@@ -8,6 +8,9 @@ Ext.define('D.model.Word',{
         },
             {
                 name: 'difficulty', type: 'string'
+            },
+            {
+                name: 'locale' //the language that this was created in
             }
         ]
     }
