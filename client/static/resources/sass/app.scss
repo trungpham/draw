@@ -17,3 +17,64 @@
 @include sencha-msgbox;
 
 // Your custom code goes here...
+
+.size-select{
+  width:38px;
+  height:38px;
+  border-radius:38px;
+/* Firefox */
+display:-moz-box;
+-moz-box-orient:horizontal;
+-moz-box-pack:center;
+-moz-box-align:center;
+
+/* Safari and Chrome */
+display:-webkit-box;
+-webkit-box-orient:horizontal;
+-webkit-box-pack:center;
+-webkit-box-align:center;
+
+/* W3C */
+display:box;
+box-orient:horizontal;
+box-pack:center;
+box-align:center;
+
+}
+
+
+.size-select-active{
+  background-color: #E6E6FA;
+}
+
+.size-select-tiny{
+  width: 8px;
+  height: 8px;
+}
+
+.size-select-small{
+  width: 16px;
+  height: 16px;
+}
+
+.size-select-medium{
+  width: 24px;
+  height: 24px;
+}
+
+.size-select-large{
+  width: 32px;
+  height: 32px;
+}
+
+@include pictos-iconmask('trash2');
+@include pictos-iconmask('compose1');
+
+@include pictos-iconmask('eraser');
+
+
+.full-circle {
+ background-color: #000000;
+  -moz-border-radius:50%;
+  -webkit-border-radius:50%;
+}

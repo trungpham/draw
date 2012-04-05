@@ -17,7 +17,7 @@ ss.client.define('main', {
 });
 
 function routes(app){
-    app.get('/', function (req, res) {
+    app.get('/2', function (req, res) {
         res.serve('main')}
     );
 
