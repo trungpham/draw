@@ -1,7 +1,7 @@
 // My SocketStream app
 
-var http = require('http'),
-    ss = require('socketstream'),
+var ss = require('socketstream'),
+    express = require('express'),
     authenticate = require('./server/router/authenticate'),
     mongoose = require('mongoose');
 
@@ -16,15 +16,13 @@ ss.client.define('main', {
   tmpl: '*'
 });
 
+function routes(app){
+    app.get('/', function (req, res) {
+        res.serve('main')}
+    );
 
-ss.http.router.on('/authenticate/facebook', authenticate.facebook.signedRequest);
-
-// Serve this client on the root URL
-ss.http.router.on('/', function(req, res) {
-  res.serveClient('main');
-});
-
-ss.http.middleware.prepend(ss.http.connect.bodyParser());
+    app.post('/authenticate/facebook', authenticate.facebook.signedRequest);
+};
 
 // Remove to use only plain .js, .html and .css files if you prefer
 ss.client.formatters.add(require('ss-coffee'));
@@ -37,9 +35,15 @@ ss.client.templateEngine.use(require('ss-hogan'));
 // Minimize and pack assets if you type: SS_ENV=production node app.js
 if (ss.env == 'production') ss.client.packAssets();
 
+
+var app = express.createServer(
+    ss.http.middleware,
+    express.bodyParser(),
+    express.router(routes)
+);
+
 // Start web server
-var server = http.Server(ss.http.middleware);
-server.listen(3000);
+var server = app.listen(3000);
 
 // Start SocketStream
 ss.start(server);
