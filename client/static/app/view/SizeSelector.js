@@ -35,7 +35,11 @@ Ext.define('D.view.SizeSelector', {
 
                     _this.hide();
 
-                })
+                },
+                    this,
+                    {
+                        single: true
+                    });
             }
         }
 
