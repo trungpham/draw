@@ -22,7 +22,7 @@ Ext.define("D.view.game.New", {
             {
                 id: 'canvas',
                 xtype: 'container',
-                html: '<canvas width="640" height="640" id="new-drawing-canvas"></canvas>'
+                html: '<canvas width="320" height="320" id="new-drawing-canvas"></canvas>'
             },
 
             {
@@ -120,43 +120,56 @@ Ext.define("D.view.game.New", {
         //create if not there yet
 
         if (!this.penSizeSelector) {
-            this.penSizeSelector = Ext.create('Ext.Panel', {
-                id:'penSizeSelector',
-                xtype:'panel',
-                data:['tiny', 'small', 'medium', 'large'],
-                tpl:'<tpl for="."><div class="size-select"><div class="full-circle size-select-{.}"></div></div></tpl>',
-                //modal:true,
-                width:50,
-                height:164,
-                //hideOnMaskTap:true,
-                listeners:{
-                    tap:function () {
-                        console.log('tag');
-                    },
-                    painted: function(){
-                        var el = Ext.get(this.getId());
-                        el.on('tap', function(){
-                            console.log(arguments);
-                        })
-                    },
-                    click:function () {
-                                            console.log('tag');
-                }
-                }
-            });
+            this.penSizeSelector = Ext.create('D.view.SizeSelector');
+
+//            this.penSizeSelector = Ext.create('Ext.Panel', {
+//                id:'penSizeSelector',
+//                xtype:'panel',
+//                data:['tiny', 'small', 'medium', 'large'],
+//                tpl:'<tpl for="."><div class="size-select" data-size="{.}"><div data-size="{.}" class="full-circle size-select-{.}"></div></div></tpl>',
+//                modal:true,
+//                width:50,
+//                height:164,
+//                hideOnMaskTap:true,
+//                currentSize: 'tiny',
+//                listeners:{
+//                    painted: function(){
+//
+//                        var _this = this;
+//                        _this.element.select('.size-select[data-size="'+this.currentSize+'"]').addCls('size-select-active');
+//
+//                        this.element.on('tap', function(e, node){
+//                            //add the active class
+//                            var size = node.getAttribute('data-size');
+//
+//
+//                            //is this already active?
+//                            if (size != _this.currentSize){
+//                                _this.currentSize = size;
+//
+//                                //remove the other active
+//                                _this.element.select('.size-select-active').toggleCls('size-select-active');
+//
+//                                var dom = _this.element.query('.size-select[data-size="'+size+'"]')[0];
+//                                Ext.get(dom).addCls('size-select-active');
+//
+//                                _this.fireEvent('sizeChanged', size);
+//                            }
+//
+//                            _this.hide();
+//
+//                        })
+//                    }
+//                }
+//            });
         }
-
-
-//        this.penSizeSelector.on('tap', function(){
-//            console.log(arguments);
-//        });
-
         this.penSizeSelector.showBy(this.query('#pen')[0]);
     },
     onEraser: function(e){
-
-        this.query('#penSizeSelector')
-            debugger
+        if (!this.eraserSizeSelector) {
+            this.eraserSizeSelector = Ext.create('D.view.SizeSelector');
+        }
+        this.eraserSizeSelector.showBy(this.query('#eraser')[0]);
     }
 
 });
