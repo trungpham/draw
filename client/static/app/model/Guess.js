@@ -85,5 +85,13 @@ Ext.define('D.model.Guess', {
     },
     shuffle: function(){
 
+    },
+    /**
+     *
+     * @param {Number} letterIndex
+     * @return {Object} {row: 0, col:y}
+     */
+    getPosition: function(letterIndex){
+        return {row: this.gameLetters[letterIndex].row, col: this.gameLetters[letterIndex].col};
     }
 });

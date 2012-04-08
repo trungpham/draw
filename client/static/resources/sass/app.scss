@@ -78,3 +78,36 @@ box-align:center;
   -moz-border-radius:50%;
   -webkit-border-radius:50%;
 }
+
+.game-board .slot{
+  background-color: #ffffff;
+  -webkit-border-radius:5px;
+  border-color: #adff2f;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.game-board{
+  background-color: #20b2aa;
+}
+
+.letter{
+  background-color: #517cff;
+  -webkit-border-radius:5px;
+  border-color: #0f0aff;
+  border-width: 1px;
+  border-style: solid;
+  z-index: 1;
+}
+
+.letter .x-innerhtml {
+  font-weight:bold;
+  color: #ffffff;
+  display:-webkit-box;
+  -webkit-box-orient:horizontal;
+  -webkit-box-pack:center;
+  -webkit-box-align:center;
+}
+.letter.x-dragging{
+  z-index: 999;
+}
