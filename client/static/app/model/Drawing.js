@@ -46,7 +46,9 @@ Ext.define('D.model.Drawing',{
         if (!this.get('startTime')){
             this.set('startTime', (new Date()).getTime());
         }
-        this.set('data', []);
+        if (!this.get('data')){
+            this.set('data', []);
+        }
     },
     /**
      * record the user action on this drawing
