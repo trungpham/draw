@@ -55,59 +55,59 @@ Ext.define('D.model.Drawing',{
     record:function (opts) {
         switch (opts.action) {
             case 'pen':
-                this.get('data').push([
-                    'p',
-                    this.calOffset(),
-                    opts.startX,
-                    opts.startY,
-                    opts.endX,
+                this.get('data').push(
+                    'p-'+
+                    this.calOffset() + '-' +
+                    opts.startX + '-' +
+                    opts.startY + '-' +
+                    opts.endX + '-' +
                     opts.endY
-                ]);
+                );
                 break;
             case 'dot':
-                this.get('data').push([
-                    'd',
-                    this.calOffset(),
-                    opts.x,
+                this.get('data').push(
+                    'd-'+
+                    this.calOffset()+'-'+
+                    opts.x + '-' +
                     opts.y
-                ]);
+                );
                 break;
             case 'erase':
-                this.get('data').push([
-                    'e',
-                    this.calOffset(),
-                    opts.startX,
-                    opts.startY,
-                    opts.endX,
+                this.get('data').push(
+                    'e-'+
+                    this.calOffset() + '-' +
+                    opts.startX + '-' +
+                    opts.startY + '-' +
+                    opts.endX + '-' +
                     opts.endY
-                ]);
+                );
                 break;
             case 'clear':
-                this.get('data').push([
-                    'clear',
+                this.get('data').push(
+                    'clear-' +
                     this.calOffset()
-                ]);
+                );
                 break;
             case 'penSize':
-                this.get('data').push([
-                    'penSize',
-                    this.calOffset(),
+                this.get('data').push(
+                    'penSize-' +
+                    this.calOffset() + '-' +
                     opts.size
-                ]);
+                );
                 break;
             case 'penColor':
-                this.get('data').push([
-                    'penColor',
-                    this.calOffset(),
+                this.get('data').push(
+                    'penColor-' +
+                    this.calOffset() + '-' +
                     opts.color
-                ]);
+                );
                 break;
             case 'eraseSize':
-                this.get('data').push([
-                    'eraseSize',
-                    this.calOffset(),
+                this.get('data').push(
+                    'eraseSize-' +
+                    this.calOffset() +'-'+
                     opts.size
-                ]);
+                );
                 break;
 
         }

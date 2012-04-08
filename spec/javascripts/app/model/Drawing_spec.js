@@ -14,14 +14,14 @@ describe('D.model.Drawing', function(){
             action: 'penColor',
             color: 'ffaacc'
         });
-        expect(drawing.get('data')).toEqual([['penColor', 10, 'ffaacc']]);
+        expect(drawing.get('data')).toEqual(['penColor-10-ffaacc']);
     });
     it('should record pencil size change', function(){
         drawing.record({
             action: 'penSize',
             size: 1
         });
-        expect(drawing.get('data')).toEqual([['penSize', 10, 1]]);
+        expect(drawing.get('data')).toEqual(['penSize-10-1']);
     });
 
     it('should record erase size change', function(){
@@ -29,7 +29,7 @@ describe('D.model.Drawing', function(){
             action: 'eraseSize',
             size: 1
         });
-        expect(drawing.get('data')).toEqual([['eraseSize', 10, 1]]);
+        expect(drawing.get('data')).toEqual(['eraseSize-10-1']);
     });
 
     it('should add a pen action', function(){
@@ -41,14 +41,14 @@ describe('D.model.Drawing', function(){
             endX: 2,
             endY: 3
         });
-        expect(drawing.get('data')).toEqual([['p',10,0,1,2,3]]);
+        expect(drawing.get('data')).toEqual(['p-10-0-1-2-3']);
     });
     it('should add the clear action', function(){
         drawing.record({
             action: 'clear'
         });
 
-        expect(drawing.get('data')).toEqual([['clear',10]]);
+        expect(drawing.get('data')).toEqual(['clear-10']);
     });
     it('should add the erase action', function(){
         drawing.record({
@@ -58,7 +58,7 @@ describe('D.model.Drawing', function(){
             endX: 2,
             endY: 3
         });
-        expect(drawing.get('data')).toEqual([['e',10,0,1,2,3]]);
+        expect(drawing.get('data')).toEqual(['e-10-0-1-2-3']);
     });
 
     it('should add the dot action', function(){
@@ -67,6 +67,6 @@ describe('D.model.Drawing', function(){
             x: 1,
             y: 2
         });
-        expect(drawing.get('data')).toEqual([['d',10, 1, 2]]);
+        expect(drawing.get('data')).toEqual(['d-10-1-2']);
     });
 });
