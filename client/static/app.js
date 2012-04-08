@@ -13,7 +13,7 @@ Ext.application({
     ],
     models: ['User', 'ExternalFriend', 'Drawing', 'Guess'],
     views: ['Main', 'FriendPicker', 'game.New'],
-    controllers: ['Main', 'Game'],
+    controllers: ['Main', 'Game', 'Test'],
 
     icon: {
         57: 'resources/icons/Icon.png',
