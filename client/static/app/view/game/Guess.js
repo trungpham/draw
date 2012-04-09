@@ -1,9 +1,12 @@
 Ext.define('D.view.game.Guess', {
     extend:'Ext.Container',
-    requires: 'D.lib.Math',
+    requires: ['D.lib.Math', 'D.view.drawing.Player'],
     config:{
         layout:'vbox',
         items:[
+            {
+                xtype: 'drawingplayer'
+            },
             {
                 xtype:'container',
                 id:'guessRow',
@@ -26,6 +29,16 @@ Ext.define('D.view.game.Guess', {
         ],
         listeners:{
             initialize:function () {
+
+                //attach the drawing to the drawing player
+                var drawingPlayerView = this.child('drawingplayer');
+
+                var guess = this.getRecord();
+                drawingPlayerView.setRecord(guess.getDrawing());
+
+
+                drawingPlayerView.on('playback.move', guess.setCurrentAction, guess); //record the drawing action
+
                 var _this = this;
                 var i;
                 for (i = 0; i < this.getRecord().get('wordLength'); i++) {
@@ -76,14 +89,10 @@ Ext.define('D.view.game.Guess', {
                                 direction:'both',
                                 listeners:{
                                     drag:function (draggable, e, x, y) {
-                                        console.log(arguments)
-                                        //     console.log(x);
-                                        //console.log(y);
-                                        //console.log(e.target);
+
                                     },
                                     dragstart:function () {
-                                        console.log(this)
-                                        console.log(arguments)
+
                                     },
                                     dragend:function (draggable, e, x, y) {
 
@@ -159,6 +168,9 @@ Ext.define('D.view.game.Guess', {
                     Ext.get('letter-'+index).setXY(el.getXY()).show();
 
                 });
+
+                var drawingPlayerView = this.child('drawingplayer');
+                drawingPlayerView.play();
             }
         }
     }

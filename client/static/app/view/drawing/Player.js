@@ -1,8 +1,9 @@
 //this view will play back the raw drawing
 Ext.define('D.view.drawing.Player', {
-    extend:'Ext.Container',
+    extend:'Ext.Component',
+    xtype: 'drawingplayer',
     config: {
-        html: '<canvas id="drawing-player-canvas" width="640" height="640"></canvas>',
+        html: '<canvas id="drawing-player-canvas" width="320" height="220"></canvas>',
         listeners: {
             painted: function(){
                 this.canvas = document.getElementById('drawing-player-canvas');
@@ -14,7 +15,7 @@ Ext.define('D.view.drawing.Player', {
         }
     },
     statics: {
-        DRAW_INTERVAL: 50 //pause 10 milliseconds between each action
+        DRAW_INTERVAL: 250 //pause 10 milliseconds between each action
     },
     /**
      * this function will play back the drawing
@@ -23,6 +24,12 @@ Ext.define('D.view.drawing.Player', {
         this.drawingData = this.getRecord().get('data');
         this.currentIndex = 0;
         this._drawLoop(this);
+    },
+    /**
+     * fast word the drawing
+     */
+    skip: function(){
+
     },
     _drawLoop: function(scope){
 
@@ -52,5 +59,6 @@ Ext.define('D.view.drawing.Player', {
                 this._drawStroke(actionDump[2], actionDump[3], actionDump[4], actionDump[5]);
                 break;
         }
+        this.fireEvent('playback.move', this.currentIndex);
     }
 });

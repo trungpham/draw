@@ -17,14 +17,22 @@ describe('D.model.Guess', function(){
         expect(function(){
             expect(guess.gameBoard[1][1]).not.toBeDefined();
             guess.move(0, [1,1]) //move letter A to the 2nd spot in the guess box
-            expect(guess.get('data')).toEqual([['m', 10, 0, 1, 1]]);
+            expect(guess.get('data')).toEqual({0: ['m-10-0-1-1']});
             expect(guess.gameBoard[1][1]).toEqual(0);
         }).not.toThrow();
         expect(function(){
             expect(guess.gameBoard[0][0]).not.toBeDefined();
             guess.move(1, [0,0]) //move letter B to where A used to be
-            expect(guess.get('data')).toEqual([['m', 10, 0, 1, 1],['m', 10, 1, 0, 0]]);
+            expect(guess.get('data')).toEqual({0: ['m-10-0-1-1', 'm-10-1-0-0']});
             expect(guess.gameBoard[0][0]).toEqual(1);
+        }).not.toThrow();
+
+        expect(function(){
+            guess.setCurrentAction(3);
+            expect(guess.gameBoard[1][2]).not.toBeDefined();
+            guess.move(1, [1,2]);
+            expect(guess.get('data')[3]).toEqual(['m-10-1-1-2']);
+            expect(guess.gameBoard[1][2]).toEqual(1);
         }).not.toThrow();
 
     });

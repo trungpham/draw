@@ -30,7 +30,13 @@ Ext.define('D.model.Guess', {
         ]
     },
     init: function(){
-        this.set('data', []); //default to an empty array
+        if (!this.get('data')){
+            this.set('data', {}); //default to an empty object
+        }
+
+        if (!this._currentAction){
+            this._currentAction = 0;
+        }
 
         //set the game board
         this.gameBoard = [
@@ -50,6 +56,9 @@ Ext.define('D.model.Guess', {
                                    };
         }
 
+    },
+    setCurrentAction: function(index){
+        this._currentAction = index;
     },
     move: function(letter, coordinates){
         if (this.gameBoard[coordinates[0]][coordinates[1]] != undefined){
@@ -71,10 +80,21 @@ Ext.define('D.model.Guess', {
         }
 
         this.gameBoard[this.gameLetters[letter].row][this.gameLetters[letter].col] = undefined;
-        this.get('data').push(['m', this.calOffset(), letter, coordinates[0], coordinates[1]]);
+        this._addMove('m-' + this.calOffset()+'-' +letter+'-' +coordinates[0]+'-' +coordinates[1]);
         this.gameBoard[coordinates[0]][coordinates[1]] = letter;
         this.gameLetters[letter].row = coordinates[0];
         this.gameLetters[letter].col = coordinates[1];
+    },
+
+    _addMove: function(move){
+        var data = this.get('data');
+
+        if (!data[this._currentAction]){
+            data[this._currentAction] = [];
+        }
+
+        data[this._currentAction].push(move);
+
     },
     /**
      *  calculate the offset
