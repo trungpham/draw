@@ -1,28 +1,19 @@
 Ext.define("D.view.game.New", {
     id:'newGameView',
+    requires: ['D.view.Canvas'],
     extend:'Ext.Container',
     config: {
         fullscreen: true,
         layout: 'vbox',
         items: [
             {
+                docked: 'top',
                 xtype: 'container',
                 html: 'You are drawing {word} for ${friend}'
             },
-            {
-                layout: 'hbox',
-                items: [
-                    {
-                        xtype: 'panel',
-                        data: {value: 'blue'},
-                        tpl: '{value}'
-                    }
-                ]
-            },
-            {
-                id: 'canvas',
-                xtype: 'container',
-                html: '<canvas width="320" height="320" id="new-drawing-canvas"></canvas>'
+
+            {   centered: true,
+                xtype: 'canvas'
             },
 
             {
@@ -84,11 +75,13 @@ Ext.define("D.view.game.New", {
         }, this);
     },
     onShow: function(){
-        var element = this.query('container#canvas')[0].element;
+        var element = this.child('canvas').element;
         element.on('touchstart', this.onCanvasTouchStart, this); //this get fired first
         element.on('touchmove', this.onCanvasTouchMove, this); //this will get fired if the user moves the mouse
         element.on('tap', this.onCanvasTap, this); //this will get fired of the user clicks and lets go right away
-        this.canvas = document.getElementById('new-drawing-canvas');
+        element.on('dragend', this.onCanvasDragEnd, this); //when user lifts up the finger
+        this.canvas = element.down('canvas', true); //return the actual canvas dom
+        this.canvasXY = Ext.get(this.canvas).getXY();
         this.context = this.canvas.getContext('2d');
         this.context.lineWidth = 2;
         this.context.lineCap = "round";
@@ -96,25 +89,32 @@ Ext.define("D.view.game.New", {
     },
     onCanvasTouchStart: function(e){
         this.context.beginPath();
-        this.context.moveTo(e.pageX, e.pageY);
-        this.lastX = e.pageX;
-        this.lastY = e.pageY;
+        var x = e.pageX - this.canvasXY[0];
+        var y = e.pageY - this.canvasXY[1];
+        this.context.moveTo(x, y);
+        this.lastX = x;
+        this.lastY = y;
     },
     onCanvasTap: function(e){
 
     },
+    onCanvasDragEnd: function(e){
+        this.context.closePath();
+    },
     onCanvasTouchMove: function(e){
-        this.context.lineTo(e.pageX, e.pageY);
+        var x = e.pageX - this.canvasXY[0];
+        var y = e.pageY - this.canvasXY[1];
+        this.context.lineTo(x, y);
         this.context.stroke();
         this.params.drawing.record({
             action: 'pen',
             startX: this.lastX,
             startY: this.lastY,
-            endX: e.pageX,
-            endY: e.pageY
+            endX: x,
+            endY: y
         });
-        this.lastX = e.pageX;
-        this.lastY = e.pageY;
+        this.lastX = x;
+        this.lastY = y;
     },
     onPen: function(e){
         //create if not there yet

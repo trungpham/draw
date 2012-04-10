@@ -5,6 +5,7 @@ Ext.define('D.view.game.PlayBack', {
         layout:'vbox',
         items:[
             {
+                docked: 'top',
                 xtype: 'container',
                 layout: 'hbox',
                 items: [
@@ -17,27 +18,36 @@ Ext.define('D.view.game.PlayBack', {
                 ]
             },
             {
+                centered: true,
                 xtype: 'drawingplayer'
             },
             {
-                xtype:'container',
-                id:'guessRow',
-                cls:'game-board',
-                layout:{
-                    type:'hbox',
-                    align:'middle',
-                    pack:'center'
-                }
-            },
-            {
-                xtype:'container',
-                id:'lettersRow',
-                layout:{
-                    type:'hbox',
-                    align:'middle',
-                    pack:'center'
-                }
+                xtype: 'container',
+                docked: 'bottom',
+                items: [
+                    {
+                        xtype:'container',
+                        id:'guessRow',
+                        cls:'game-board',
+                        layout:{
+                            type:'hbox',
+                            align:'middle',
+                            pack:'center'
+                        }
+                    },
+                    {
+                        xtype:'container',
+                        id:'lettersRow',
+                        layout:{
+                            type:'hbox',
+                            align:'middle',
+                            pack:'center'
+                        }
+                    }
+                ]
+
             }
+
         ],
 
         listeners:{
@@ -54,7 +64,7 @@ Ext.define('D.view.game.PlayBack', {
                 var _this = this;
                 var i;
                 for (i = 0; i < this.getRecord().get('wordLength'); i++) {
-                    _this.child('#guessRow').add({
+                    _this.down('#guessRow').add({
                         id: 'game-board-1-' + i,
                         xtype:'component',
                         cls:'slot',
@@ -69,7 +79,7 @@ Ext.define('D.view.game.PlayBack', {
 
                 Ext.Array.each(this.getRecord().get('letters'), function (letter, index) {
                     //add some hidden place holder
-                    _this.child('#lettersRow').add({
+                    _this.down('#lettersRow').add({
                         id: 'game-board-0-' + index,
                         data: {row: 0, col: index},
                         cls: 'letterHolder',
@@ -79,7 +89,7 @@ Ext.define('D.view.game.PlayBack', {
                         margin:4
 
                     });
-                    _this.add(
+                    Ext.Viewport.add(
                         {
                             id: 'letter-'+index,
                             style:'position: absolute;',

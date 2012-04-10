@@ -1,12 +1,16 @@
 //this view will play back the raw drawing
 Ext.define('D.view.drawing.Player', {
-    extend:'Ext.Component',
+    extend: 'Ext.Container',
     xtype: 'drawingplayer',
     config: {
-        html: '<canvas id="drawing-player-canvas" width="320" height="220"></canvas>',
+        items:[
+            {
+                xtype:'canvas'
+            }
+        ],
         listeners: {
             painted: function(){
-                this.canvas = document.getElementById('drawing-player-canvas');
+                this.canvas = this.element.down('canvas', true);
                 this.context = this.canvas.getContext('2d');
                 this.context.lineWidth = 2;
                 this.context.lineCap = "round";
@@ -49,11 +53,11 @@ Ext.define('D.view.drawing.Player', {
 
     },
     _drawStroke: function(x1, y1, x2, y2){
-
         this.context.beginPath();
         this.context.moveTo(x1, y1);
         this.context.lineTo(x2, y2);
         this.context.stroke();
+        this.context.closePath();
     },
     _draw: function(action){
         var actionDump = action.split('-');

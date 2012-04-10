@@ -5,6 +5,7 @@ Ext.define('D.view.game.Guess', {
         layout:'vbox',
         items:[
             {
+                docked: 'top',
                 xtype: 'container',
                 layout: 'hbox',
                 items: [
@@ -24,28 +25,37 @@ Ext.define('D.view.game.Guess', {
                     }
                 ]
             },
-            {
+            {  centered: true,
                 xtype: 'drawingplayer'
             },
             {
-                xtype:'container',
-                id:'guessRow',
-                cls:'game-board',
-                layout:{
-                    type:'hbox',
-                    align:'middle',
-                    pack:'center'
-                }
-            },
-            {
-                xtype:'container',
-                id:'lettersRow',
-                layout:{
-                    type:'hbox',
-                    align:'middle',
-                    pack:'center'
-                }
+                xtype: 'container',
+                docked: 'bottom',
+                layout: 'vbox',
+                items: [
+                    {
+                        xtype:'container',
+                        id:'guessRow',
+                        cls:'game-board',
+                        layout:{
+                            type:'hbox',
+                            align:'middle',
+                            pack:'center'
+                        }
+                    },
+                    {
+                        xtype:'container',
+                        id:'lettersRow',
+                        layout:{
+                            type:'hbox',
+                            align:'middle',
+                            pack:'center'
+                        }
+                    }
+
+                ]
             }
+
         ],
         listeners:{
             initialize:function () {
@@ -91,8 +101,10 @@ Ext.define('D.view.game.Guess', {
                         margin:4
 
                     });
-                    _this.add(
+
+                    Ext.Viewport.add(
                         {
+                            renderTo: Ext.Viewport.element,
                             id: 'letter-'+index,
                             style:'position: absolute;',
                             width:26,
@@ -186,7 +198,6 @@ Ext.define('D.view.game.Guess', {
                 Ext.select('.letterHolder').each(function(el, c, index){
 
                     Ext.get('letter-'+index).setXY(el.getXY()).show();
-
                 });
 
                 var drawingPlayerView = this.child('drawingplayer');
