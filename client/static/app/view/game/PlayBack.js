@@ -5,6 +5,18 @@ Ext.define('D.view.game.PlayBack', {
         layout:'vbox',
         items:[
             {
+                xtype: 'container',
+                layout: 'hbox',
+                items: [
+                    {
+                        xtype: 'button',
+                        id: 'skip-button',
+                        text: 'Skip',
+                        docked: 'left'
+                    }
+                ]
+            },
+            {
                 xtype: 'drawingplayer'
             },
             {
@@ -93,6 +105,12 @@ Ext.define('D.view.game.PlayBack', {
                 });
                 var drawingPlayerView = this.child('drawingplayer');
                 drawingPlayerView.play();
+
+                var skipButton = this.down('#skip-button');
+                skipButton.on('tap', function(){
+
+                    drawingPlayerView.skip();
+                });
             }
 
         }

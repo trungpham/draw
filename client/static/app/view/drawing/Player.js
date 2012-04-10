@@ -29,7 +29,7 @@ Ext.define('D.view.drawing.Player', {
      * fast word the drawing
      */
     skip: function(){
-
+        this._skipped = true;
     },
     _drawLoop: function(scope){
 
@@ -39,7 +39,11 @@ Ext.define('D.view.drawing.Player', {
 
         if (scope.currentIndex < scope.drawingData.length){
             //buffer the next action
-            setTimeout(scope._drawLoop, D.view.drawing.Player.DRAW_INTERVAL, scope);
+            if (scope._skipped){
+                scope._drawLoop(scope);
+            }else{
+                setTimeout(scope._drawLoop, D.view.drawing.Player.DRAW_INTERVAL, scope);
+            }
         }
 
 

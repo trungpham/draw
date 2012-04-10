@@ -5,6 +5,26 @@ Ext.define('D.view.game.Guess', {
         layout:'vbox',
         items:[
             {
+                xtype: 'container',
+                layout: 'hbox',
+                items: [
+                    {
+                        xtype: 'button',
+                        id: 'skip-button',
+                        text: 'Skip',
+                        docked: 'left'
+                    },
+
+                    {
+                        xtype: 'button',
+                        id: 'give-up-button',
+                        text: 'Give up',
+                        docked: 'right'
+
+                    }
+                ]
+            },
+            {
                 xtype: 'drawingplayer'
             },
             {
@@ -171,6 +191,23 @@ Ext.define('D.view.game.Guess', {
 
                 var drawingPlayerView = this.child('drawingplayer');
                 drawingPlayerView.play();
+
+                var skipButton = this.down('#skip-button');
+                skipButton.on('tap', function(){
+                    this.disable();
+                    drawingPlayerView.skip();
+                });
+
+                var giveUpButton = this.down('#give-up-button');
+                giveUpButton.on('tap', function(){
+                    Ext.Msg.confirm('Give up', 'End your streak and start over?', function(buttonId){
+
+                        if (buttonId === 'yes'){
+                            this.fireEvent('guess.giveup');
+                        }
+
+                    }, this);
+                })
             }
         }
     }
