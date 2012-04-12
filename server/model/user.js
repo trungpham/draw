@@ -24,6 +24,5 @@ UserSchema.methods.toAuthableJSON = function(){
     }
 };
 
-mongoose.model('Identity', IdentitySchema);
 
 mongoose.model('User', UserSchema);
