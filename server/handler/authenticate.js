@@ -1,10 +1,10 @@
-exports.facebook = {
-        signedRequest: function(req, res){
-            var SignedRequest = require('../lib/fb_signed_request');
-            var config = require('../../config.js');
-            var mongoose = require('mongoose');
-            require('../model/user.js');
-            var User = mongoose.model('User');
+module.exports = {
+        fbSignedRequest: function(req, res){
+            var SignedRequest = require(process.cwd()+'/server/lib/fb_signed_request');
+            var config = require(process.cwd()+'/config.js');
+
+            var User = require(process.cwd()+'/server/model/user');
+
             SignedRequest.secret = config.facebook.appSecret;
             var signedRequest = new SignedRequest(req.body.signedRequest);
 

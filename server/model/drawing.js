@@ -1,7 +1,7 @@
 var mongoose = require('mongoose'), Schema = mongoose.Schema, ObjectId = Schema.ObjectId;
 
 var DrawingSchema = new Schema({
-    created_time: Number,
+    created_time: { type: Date, default: Date.now },
     data: Array,
     match_id: {type: ObjectId, ref: 'Match'}, //let it be empty if the user is inviting a facebook friend who has not signed up yet
     identity_id: {type: ObjectId, ref: 'Identity'}, //populate this if the invitee does not exist in the system yet

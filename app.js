@@ -2,7 +2,7 @@
 
 var ss = require('socketstream'),
     express = require('express'),
-    authenticate = require('./server/router/authenticate'),
+    authenticate = require('./server/handler/authenticate'),
     mongoose = require('mongoose');
 
 //connect to the mongoose database
@@ -21,7 +21,7 @@ function routes(app){
         res.serve('main')}
     );
 
-    app.post('/authenticate/facebook', authenticate.facebook.signedRequest);
+    app.post('/authenticate/facebook', authenticate.fbSignedRequest);
 };
 
 // Remove to use only plain .js, .html and .css files if you prefer
