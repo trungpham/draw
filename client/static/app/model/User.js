@@ -1,5 +1,5 @@
 Ext.define('D.model.User', {
-    requires: ['Ext.data.Store'],
+    requires: ['Ext.data.Store', 'D.model.Identity'],
     extend:'Ext.data.Model',
     config:{
         fields:[
@@ -13,7 +13,6 @@ Ext.define('D.model.User', {
             name:'friends',
             store:{
                 sorters:'lastName',
-                storeId: 'userFriendsStore',
                 grouper:{
                     groupFn:function (record) {
                         return record.get('name')[0];
@@ -25,19 +24,34 @@ Ext.define('D.model.User', {
 
     fetchFriends: function(cb){
         var _this = this;
+        var fbFriendsStore = Ext.getStore('fbFriends');
 
-        if (!this._fetched){
+        if (!fbFriendsStore){
             FB.api('/me/friends', function(result){
-                        var i;
-                        for (i=0; i< result.data.length; i++){
-                            _this.friends().add(result.data[i]);
-                        }
 
-                        _this._fetched = true;
-                cb();
-            });
-        }else{
-            Ext.defer(cb, 0);
+                Ext.create('Ext.data.Store', {
+                    storeId: 'userFriendsStore',
+                    model: 'D.model.Identity',
+                    data: Ext.Array.map(result.data, function(friend){
+
+                        return {external_id: friend.id, name: friend.name, source: 'fb'}
+                    }),
+
+                    sorters:'lastName',
+                    grouper:{
+                       groupFn:function (record) {
+                            return record.get('name')[0];
+                        }
+                    }
+
+                });
+
+                _this.fireEvent('friends.fetched');
+                });
+
+        }
+        else{
+            this.fireEvent('friends.fetched');
         }
 
     }

@@ -70,7 +70,11 @@ Ext.define("D.view.game.New", {
     onSubmitDrawing: function(){
         Ext.Msg.confirm('Confirmation', 'Send this picture to your friend?', function(buttonId, value, opts){
             if (buttonId === 'yes'){
-                this.fireEvent('submit', this.params.game, this.params.drawing);
+                this.fireEvent('submit', {drawing: this.getData().drawing,
+                    friend: this.getData().friend,
+                    word: this.getData().word
+
+                });
             }
         }, this);
     },
@@ -106,7 +110,7 @@ Ext.define("D.view.game.New", {
         var y = e.pageY - this.canvasXY[1];
         this.context.lineTo(x, y);
         this.context.stroke();
-        this.params.drawing.record({
+        this.getData().drawing.record({
             action: 'pen',
             startX: this.lastX,
             startY: this.lastY,

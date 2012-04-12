@@ -1,12 +1,21 @@
 Ext.define('D.model.Drawing',{
     extend: 'Ext.data.Model',
     config: {
+        proxy: {
+                type: 'rest',
+                url : 'drawings',
+                format: 'json'
+        },
+
         fields: [
             {
                 name: 'id', type: 'string'
             },
             {
-                name: 'createdTime', type: 'int'
+                name: 'created_time', type: 'int'
+            },
+            {
+                name: 'start_time', type: 'int'
             },
             {
                 name: 'data', type: 'auto'
@@ -16,6 +25,9 @@ Ext.define('D.model.Drawing',{
             },
             {
                 name: 'word_id'
+            },
+            {
+                name: 'identity_id'
             }
         ],
         belongsTo:[
@@ -27,24 +39,21 @@ Ext.define('D.model.Drawing',{
             },
             {
                 name: 'word', model: 'D.model.Word'
+            },
+            {
+                name: 'identity', model: 'D.model.Identity'
             }
         ],
         hasOne: [
             {
                 name: 'guess', model: 'D.model.Guess'
             }
-        ],
-        proxy: {
-                type: 'rest',
-                url : 'mocks/drawings.json',
-            reader: 'json',
-            writer: 'json'
-            }
+        ]
 
     },
     init: function(){
-        if (!this.get('startTime')){
-            this.set('startTime', (new Date()).getTime());
+        if (!this.get('start_time')){
+            this.set('start_time', (new Date()).getTime());
         }
         if (!this.get('data')){
             this.set('data', []);
@@ -119,6 +128,6 @@ Ext.define('D.model.Drawing',{
      *  @return {number}
      */
     calOffset: function(){
-        return (new Date()).getTime() - this.get('createdTime');
+        return (new Date()).getTime() - this.get('start_time');
     }
 });

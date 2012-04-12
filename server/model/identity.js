@@ -4,8 +4,9 @@ var mongoose = require('mongoose')
 var IdentitySchema = new Schema({
     source: String,
     id: String,
-    data: String
+    name: String,
+    external_id: String
 },
     { strict: true });
 
-mongoose.model('Identity', IdentitySchema);
+module.exports = mongoose.model('Identity', IdentitySchema);

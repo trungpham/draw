@@ -5,6 +5,21 @@ var ss = require('socketstream'),
     authenticate = require('./server/handler/authenticate'),
     mongoose = require('mongoose');
 
+
+//overriding toJSON
+var oldToJSON = mongoose.Document.prototype.toJSON;
+
+mongoose.Document.prototype.toJSON = function(){
+    var json = oldToJSON.call(this, arguments);
+    json.id = json._id;
+    delete json._id;
+    return json;
+};
+
+
+var identitiesHandler = require('./server/handler/identities');
+
+var drawingsHandler = require('./server/handler/drawings');
 //connect to the mongoose database
 mongoose.connect('mongodb://localhost/draw_dev');
 
@@ -20,6 +35,10 @@ function routes(app){
     app.get('/2', function (req, res) {
         res.serve('main')}
     );
+
+    app.post('/identities.json', identitiesHandler.create);
+
+    app.post('/drawings.json', drawingsHandler.create);
 
     app.post('/authenticate/facebook', authenticate.fbSignedRequest);
 };

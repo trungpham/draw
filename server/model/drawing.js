@@ -12,4 +12,4 @@ var DrawingSchema = new Schema({
     state: String //could be drawn/guessed/forfeited
 });
 
-mongoose.model('Drawing', DrawingSchema);
+module.exports = mongoose.model('Drawing', DrawingSchema);

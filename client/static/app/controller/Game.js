@@ -36,7 +36,9 @@ Ext.define('D.controller.Game', {
         D.auth.requireLogin(function(user){
 
             //get a list of friends
-            user.fetchFriends(function(){
+            user.fetchFriends();
+
+            user.on('friends.fetched', function(){
                 _this.redirectTo('/pickFriend');
             });
         });
@@ -44,7 +46,7 @@ Ext.define('D.controller.Game', {
     },
     pickFriend: function(){
         var friendPicker = Ext.create('D.view.FriendPicker');
-        friendPicker.setStore(D.auth.currentUser.friends());
+        friendPicker.setStore(Ext.getStore('userFriendsStore'));
         this.getMain().push(friendPicker);
     },
 
@@ -56,7 +58,9 @@ Ext.define('D.controller.Game', {
     //pick the word that we want to draw
     pickWord: function(){
         //retrieve a set of words that this user has not yet drawn
-        var words = Ext.create('D.store.Words');
+        var words = Ext.create('D.store.Words', {
+            storeId: 'wordsStore'
+        });
 
         var wordPicker = Ext.create('D.view.game.WordPicker');
         wordPicker.child('list').setStore(words);
@@ -75,11 +79,11 @@ Ext.define('D.controller.Game', {
         this.redirectTo('/draw/invite/'+this.selectedFriend.getId()+'/word/'+this.selectedWord.getId());
     },
     drawForFriend: function(friendId, wordId){
-        var game = Ext.create('D.model.Match');
-        game.drawings().add({});
-        var drawing = game.drawings().first();
-
-        var gameView = Ext.create('D.view.game.New', {params: {game: game, drawing: drawing}});
+        var word = Ext.getStore('wordsStore').getById(wordId);
+        var friend = Ext.getStore('userFriendsStore').getById(friendId);
+        var drawing = Ext.create('D.model.Drawing');
+        drawing.setWord(word);
+        var gameView = Ext.create('D.view.game.New', {data: {word: word, friend: friend, drawing: drawing}});
 
 
         Ext.Viewport.add(gameView);
@@ -91,9 +95,18 @@ Ext.define('D.controller.Game', {
      * @param game
      * @param drawing
      */
-    onSubmitGame: function(game, drawing){
-        debugger
-        //save the game
-        game.drawings
+    onSubmitGame: function(data){
+        var _this = this;
+        data.friend.save(function(record, operation){
+            data.drawing.setIdentity(record);
+            data.drawing.save(function(){
+
+                _this.getMain().reset();
+                Ext.Viewport.remove(_this.getGameView());
+
+                _this.redirectTo('/');
+
+            });
+        });
     }
 });

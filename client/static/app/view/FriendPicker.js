@@ -10,7 +10,7 @@ Ext.define("D.view.FriendPicker", {
         grouped     : true,
         indexBar    : true,
         xtype: 'list',
-        itemTpl: '<img width="50" height="50" src="http://graph.facebook.com/{id}/picture"/> <strong>{name}</strong>'
+        itemTpl: '<img width="50" height="50" src="http://graph.facebook.com/{external_id}/picture"/> <strong>{name}</strong>'
 
 
 
