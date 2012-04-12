@@ -13,7 +13,7 @@ Ext.define('D.model.User', {
             name:'friends',
             store:{
                 sorters:'lastName',
-
+                storeId: 'userFriendsStore',
                 grouper:{
                     groupFn:function (record) {
                         return record.get('name')[0];

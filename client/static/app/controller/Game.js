@@ -7,17 +7,21 @@ Ext.define('D.controller.Game', {
                 tap: 'new'
             },
             friendList: {
-                select: 'onFriendSelected',
-                disclose: 'onFriendSelected'
+                itemtap: 'onFriendSelected'
+
             },
             wordsList: {
-                select: 'create'
+                itemtap: 'onWordSelected'
             },
             gameView: {
                 submit: 'onSubmitGame'
             }
         },
-
+        routes: {
+            '/pickFriend': 'pickFriend',
+            '/pickWord': 'pickWord',
+            '/draw/invite/:friendId/word/:wordId': 'drawForFriend'
+        },
         refs: {
                 main: '#mainView',
                 friendList: '#friendListView',
@@ -33,7 +37,7 @@ Ext.define('D.controller.Game', {
 
             //get a list of friends
             user.fetchFriends(function(){
-                _this.pickFriend();
+                _this.redirectTo('/pickFriend');
             });
         });
 
@@ -45,8 +49,9 @@ Ext.define('D.controller.Game', {
     },
 
     //should check to see if there's a pending game to resume before creating a brand new one
-    onFriendSelected: function(){
-        this.pickWord();
+    onFriendSelected: function(view, index, target, record){
+        this.selectedFriend = record;
+        this.redirectTo('/pickWord');
     },
     //pick the word that we want to draw
     pickWord: function(){
@@ -65,8 +70,12 @@ Ext.define('D.controller.Game', {
             }
         });
     },
-    create: function(list, record){
-        var game = Ext.create('D.model.Game');
+    onWordSelected: function(view, index, target, record){
+        this.selectedWord = record;
+        this.redirectTo('/draw/invite/'+this.selectedFriend.getId()+'/word/'+this.selectedWord.getId());
+    },
+    drawForFriend: function(friendId, wordId){
+        var game = Ext.create('D.model.Match');
         game.drawings().add({});
         var drawing = game.drawings().first();
 
@@ -75,47 +84,6 @@ Ext.define('D.controller.Game', {
 
         Ext.Viewport.add(gameView);
         Ext.Viewport.setActiveItem(gameView);
-//        var canvas = document.getElementById('new-drawing-canvas');
-//        var context = canvas.getContext('2d');
-//        context.lineWidth = 25;
-//        context.lineCap = "round";
-//        context.lineJoin = "round";
-//        var drawingListener = Ext.get('new-drawing-listener')
-//        gameView.element.addListener('tap', function(e, node){
-//            console.log('tap');
-//            context.beginPath();
-//            context.moveTo(e.pageX, e.pageY - this.getY());
-//            context.lineTo(e.pageX, e.pageY - this.getY());
-//            context.stroke();
-//        });
-//        gameView.element.addListener('dragstart', function(e, node){
-//            console.log('dragStart: ' + e.pageX, +' ' + e.pageY);
-//            context.beginPath();
-//            context.moveTo(e.pageX, e.pageY - this.getY());
-//        });
-//        gameView.element.addListener('drag', function(e, node){
-//            console.log('drag: ' + e.pageX, +' ' + e.pageY);
-//            context.lineTo(e.pageX, e.pageY - this.getY());
-//            context.stroke();
-//        });
-//        gameView.element.addListener('dragend', function(e, node){
-//            console.log('dragEnd: ' + e.pageX, +' ' + e.pageY);
-//            context.lineTo(e.pageX, e.pageY - this.getY());
-//            context.stroke();
-//        });
-//
-//        gameView.element.addListener('touch', function(e, node){
-//            console.log('touch: ' + e.pageX, +' ' + e.pageY);
-//        });
-//
-//        gameView.element.addListener('touchstart', function(e, node){
-//            console.log('touchStart: ' + e.pageX, +' ' + e.pageY);
-//        });
-//
-//
-//        drawingListener.addListener('touchmove', function(e, node){
-//            console.log('touchMove: ' + e.pageX, +' ' + e.pageY);
-//        });
     },
     /**
      * this is called when the user is done drawing
@@ -124,6 +92,7 @@ Ext.define('D.controller.Game', {
      * @param drawing
      */
     onSubmitGame: function(game, drawing){
+        debugger
         //save the game
         game.drawings
     }

@@ -1,5 +1,4 @@
 Ext.define("D.view.game.WordPicker", {
-    //id: 'friendPickerView',
     id: 'wordPickerView',
     extend: 'Ext.Container',
     config: {

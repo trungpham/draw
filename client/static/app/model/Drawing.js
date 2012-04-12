@@ -12,7 +12,7 @@ Ext.define('D.model.Drawing',{
                 name: 'data', type: 'auto'
             },
             {
-                name: 'game_id'
+                name: 'match_id'
             },
             {
                 name: 'word_id'
@@ -23,7 +23,7 @@ Ext.define('D.model.Drawing',{
                 name: 'drawer', model: 'D.model.User'
             },
             {
-                name: 'game', model: 'D.model.Game'
+                name: 'match', model: 'D.model.Match'
             },
             {
                 name: 'word', model: 'D.model.Word'

@@ -1,4 +1,4 @@
-Ext.define('D.model.Game', {
+Ext.define('D.model.Match', {
     extend: 'Ext.data.Model',
     config: {
         fields: [
