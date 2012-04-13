@@ -4,11 +4,8 @@ Ext.define('D.model.ExternalFriend', {
         fields: [
             { name: 'id', type: 'string' },
             { name: 'name', type: 'string' },
-            { name: 'source', type: 'string'}
-        ],
-        belongsTo: {
-            model: 'D.model.User', name: 'user'
-        }
-
+            { name: 'source', type: 'string'},
+            { name: 'xid', type: 'string'}
+        ]
     }
 });

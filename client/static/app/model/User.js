@@ -8,18 +8,18 @@ Ext.define('D.model.User', {
             { name: 'points', type: 'int'}
         ],
 
-        hasMany:{
-            model:'D.model.ExternalFriend',
-            name:'friends',
-            store:{
-                sorters:'lastName',
-                grouper:{
-                    groupFn:function (record) {
-                        return record.get('name')[0];
-                    }
-                }
-            }
-        }
+//        hasMany:{
+//            model:'D.model.ExternalFriend',
+//            name:'friends',
+//            store:{
+//                sorters:'lastName',
+//                grouper:{
+//                    groupFn:function (record) {
+//                        return record.get('name')[0];
+//                    }
+//                }
+//            }
+//        }
     },
 
     fetchFriends: function(cb){
@@ -31,13 +31,13 @@ Ext.define('D.model.User', {
 
                 Ext.create('Ext.data.Store', {
                     storeId: 'userFriendsStore',
-                    model: 'D.model.Identity',
+                    model: 'D.model.ExternalFriend',
                     data: Ext.Array.map(result.data, function(friend){
 
-                        return {external_id: friend.id, name: friend.name, source: 'fb'}
+                        return {xid: friend.id, name: friend.name, source: 'fb'}
                     }),
 
-                    sorters:'lastName',
+                    sorters:'name',
                     grouper:{
                        groupFn:function (record) {
                             return record.get('name')[0];

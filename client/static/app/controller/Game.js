@@ -83,6 +83,7 @@ Ext.define('D.controller.Game', {
         var friend = Ext.getStore('userFriendsStore').getById(friendId);
         var drawing = Ext.create('D.model.Drawing');
         drawing.setWord(word);
+        drawing.setExternalFriend(friend);
         var gameView = Ext.create('D.view.game.New', {data: {word: word, friend: friend, drawing: drawing}});
 
 
@@ -97,16 +98,15 @@ Ext.define('D.controller.Game', {
      */
     onSubmitGame: function(data){
         var _this = this;
-        data.friend.save(function(record, operation){
-            data.drawing.setIdentity(record);
-            data.drawing.save(function(){
+        var drawing = data.drawing;
 
-                _this.getMain().reset();
-                Ext.Viewport.remove(_this.getGameView());
+        drawing.save(function(){
 
-                _this.redirectTo('/');
+            _this.getMain().reset();
+            Ext.Viewport.remove(_this.getGameView());
 
-            });
+            _this.redirectTo('/');
+
         });
     }
 });

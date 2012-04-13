@@ -4,7 +4,8 @@ Ext.define('D.model.Drawing',{
         proxy: {
                 type: 'rest',
                 url : 'drawings',
-                format: 'json'
+                format: 'json',
+                writer: Ext.create('D.lib.DeepJsonWriter')
         },
 
         fields: [
@@ -39,14 +40,14 @@ Ext.define('D.model.Drawing',{
             },
             {
                 name: 'word', model: 'D.model.Word'
-            },
-            {
-                name: 'identity', model: 'D.model.Identity'
             }
         ],
         hasOne: [
             {
                 name: 'guess', model: 'D.model.Guess'
+            },
+            {
+                name: 'external_friend', model: 'D.model.ExternalFriend'
             }
         ]
 

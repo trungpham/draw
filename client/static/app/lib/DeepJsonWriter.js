@@ -1,5 +1,25 @@
 Ext.define('D.lib.DeepJsonWriter', {
     extend:'Ext.data.writer.Json',
+    cleanUpData: function(data, phantom){
+
+        var _data = {};
+        var _this = this;
+
+        var key;
+        for (key in data){
+            if ((key != 'id' || !phantom) && data[key]){
+                if (Ext.isObject(data[key])){
+                    _data[key] = _this.cleanUpData(data[key], phantom);
+                }else{
+                    _data[key] = data[key];
+                }
+            }
+        }
+
+
+
+       return _data;
+    },
     getRecordData:function (record, operation) {
         var isPhantom = record.phantom === true,
             writeAll = this.writeAllFields || isPhantom,
@@ -32,6 +52,6 @@ Ext.define('D.lib.DeepJsonWriter', {
             data[record.idProperty] = record.getId();
         }
 
-        return data;
+        return this.cleanUpData(data, isPhantom);
     }
 });
