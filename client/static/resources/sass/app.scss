@@ -111,3 +111,8 @@ box-align:center;
 .letter.x-dragging{
   z-index: 999;
 }
+
+.rounded-corner-top{
+  -webkit-border-top-left-radius: 10px;
+  -webkit-border-top-right-radius: 10px;
+}

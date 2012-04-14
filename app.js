@@ -20,6 +20,8 @@ mongoose.Document.prototype.toJSON = function(){
 var identitiesHandler = require('./server/handler/identities');
 
 var drawingsHandler = require('./server/handler/drawings');
+
+var pendingInvitesHandler = require('./server/handler/api/pending_invites');
 //connect to the mongoose database
 mongoose.connect('mongodb://localhost/draw_dev');
 
@@ -41,6 +43,8 @@ function routes(app){
     app.post('/drawings.json', drawingsHandler.create);
 
     app.post('/authenticate/facebook', authenticate.fbSignedRequest);
+
+    app.get('/api/pendingInvites', pendingInvitesHandler);
 };
 
 // Remove to use only plain .js, .html and .css files if you prefer

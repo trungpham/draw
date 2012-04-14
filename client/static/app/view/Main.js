@@ -1,4 +1,5 @@
 Ext.define("D.view.Main", {
+    requires: ['D.view.PendingInvites'],
     id:'mainView',
     extend:'Ext.navigation.View',
     config:
@@ -7,24 +8,28 @@ Ext.define("D.view.Main", {
             [
                 {
                     title: 'Draw With Friends',
+                    xtype: 'container',
+                    layout: {
+                        type: 'vbox',
+                        align: 'center'
+                    },
+                    scrollable: true,
                     items:
                         [
-                            {
-                                xtype:'container',
-                                left:'50%',
-                                items:
-                                    [
-                                        {
-                                            id:'createGame',
-                                            top:10,
-                                            xtype:'button',
-                                            text:'create game',
-                                            width:150,
-                                            left:-75
-                                        }
-                                    ]
 
+
+                            {
+                                margin: 10,
+                                id:'createGame',
+                                xtype:'button',
+                                text:'create game'
+                            },
+
+                            {
+                                xtype: 'pendinginvites',
+                                id: 'pendingInvites'
                             }
+
                         ]
 
                 }

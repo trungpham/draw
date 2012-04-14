@@ -1,3 +1,7 @@
+var createMatchFromPendingDrawing = function(){
+
+};
+
 var signUserInAndResponse = function(req, res, user){
     req.session.userId = user.id;
     res.setHeader('Content-Type', 'application/json');

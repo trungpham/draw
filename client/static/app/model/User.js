@@ -1,5 +1,5 @@
 Ext.define('D.model.User', {
-    requires: ['Ext.data.Store', 'D.model.Identity'],
+    requires: ['Ext.data.Store'],
     extend:'Ext.data.Model',
     config:{
         fields:[

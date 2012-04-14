@@ -32,8 +32,7 @@ Ext.application({
         // create an instance of the authentication
         D.auth = Ext.create('D.lib.Authentication');
 
-        // Initialize the main view
-        Ext.Viewport.add(Ext.create('D.view.Main'));
+
     },
 
     onUpdated: function() {
