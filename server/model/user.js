@@ -3,10 +3,11 @@ var mongoose = require('mongoose')
 
 var IdentitySchema = new Schema({
     source: String,
-    id: String,
+    xid: String,
     data: String
 },
     { strict: true });
+
 
 var UserSchema = new Schema({
     firstName: String,

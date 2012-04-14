@@ -7,4 +7,24 @@ var MatchSchema = new Schema({
 
 });
 
-mongoose.model('Match', MatchSchema);
+
+MatchSchema.statics.prepareForUser = function (userId, cb) {
+    cb([
+        {
+            id:'matchid',
+            turn:1,
+            drawing:{
+                id:1
+            },
+            external_friend:{
+                xid:1,
+                name:'trung',
+                source:'fb'
+            },
+            action:'wait' //or guess or playback or retry
+        }
+    ]
+    );
+};
+
+module.exports = mongoose.model('Match', MatchSchema);

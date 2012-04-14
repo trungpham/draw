@@ -23,7 +23,7 @@ module.exports = {
             // check if request was valid
             if (request.isValid()) {
                 //sign the user in if user exists
-                User.findOne({'identities.source':'fb', 'identities.id':request.data['user_id']}, function (err, user) {
+                User.findOne({'identities.source':'fb', 'identities.xid':request.data['user_id']}, function (err, user) {
 
                     //if user does not exist
                     if (!user) {
@@ -41,7 +41,7 @@ module.exports = {
                                 });
                                 user.identities.push({
                                     source:'fb',
-                                    id:result.id,
+                                    xid:result.id,
                                     data:result
                                 });
 

@@ -5,13 +5,20 @@ Ext.define('D.controller.Main', {
     },
 
     launch: function(){
+
         var pendingInvitesStore = Ext.create('D.store.PendingInvites', {
-            id: 'pendingInvitesStore'
+            id: 'pendingInvites'
         });
 
-        pendingInvitesStore.load();
-        // Initialize the main view
+        var matchesStore = Ext.create('D.store.Matches', {
+            id: 'matches'
+        });
+
         var mainView = Ext.create('D.view.Main');
+
+        matchesStore.load();
+
+        pendingInvitesStore.load();
 
         Ext.Viewport.add(mainView);
     }

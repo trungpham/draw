@@ -17,11 +17,12 @@ mongoose.Document.prototype.toJSON = function(){
 };
 
 
-var identitiesHandler = require('./server/handler/identities');
-
 var drawingsHandler = require('./server/handler/drawings');
 
 var pendingInvitesHandler = require('./server/handler/api/pending_invites');
+
+var matchesHandler = require('./server/handler/matches');
+
 //connect to the mongoose database
 mongoose.connect('mongodb://localhost/draw_dev');
 
@@ -38,13 +39,14 @@ function routes(app){
         res.serve('main')}
     );
 
-    app.post('/identities.json', identitiesHandler.create);
-
     app.post('/drawings.json', drawingsHandler.create);
 
     app.post('/authenticate/facebook', authenticate.fbSignedRequest);
 
     app.get('/api/pendingInvites', pendingInvitesHandler);
+
+    app.get('/matches', matchesHandler.list);
+
 };
 
 // Remove to use only plain .js, .html and .css files if you prefer

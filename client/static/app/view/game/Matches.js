@@ -1,5 +1,5 @@
-Ext.define("D.view.PendingInvites", {
-    xtype:'pendinginvites',
+Ext.define("D.view.game.Matches", {
+    xtype:'gamematches',
     extend:'Ext.Container',
     config:{
         xtype: 'container',
@@ -9,14 +9,14 @@ Ext.define("D.view.PendingInvites", {
             {
                 cls: 'rounded-corner-top',
                 xtype:'toolbar',
-                title:'Pending invitations'
+                title:'Current Games'
             },
             {
                 xtype:'list',
                 scrollable: false,
                 itemTpl: '<img width="50" height="50" src="http://graph.facebook.com/{xid}/picture"/> <strong>{name}</strong>',
-                store: 'pendingInvites',
-                emptyText:'There is no pending invitations.'
+                store: 'matches',
+                emptyText:'You have not created any game yet'
             }
         ]
 

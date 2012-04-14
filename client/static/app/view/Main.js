@@ -1,5 +1,5 @@
 Ext.define("D.view.Main", {
-    requires: ['D.view.PendingInvites'],
+    requires: ['D.view.PendingInvites', 'D.view.game.Matches'],
     id:'mainView',
     extend:'Ext.navigation.View',
     config:
@@ -24,7 +24,14 @@ Ext.define("D.view.Main", {
                                 xtype:'button',
                                 text:'create game'
                             },
-
+                            {
+                                xtype: 'gamematches',
+                                id: 'gameMatches'
+                            },
+                            {
+                                xtype: 'component',
+                                height: 20
+                            },
                             {
                                 xtype: 'pendinginvites',
                                 id: 'pendingInvites'

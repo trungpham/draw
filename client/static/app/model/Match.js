@@ -30,9 +30,7 @@ Ext.define('D.model.Match', {
         ],
         proxy: {
                 type: 'rest',
-                url : 'mocks/games.json',
-                reader: 'json',
-                writer: Ext.create('D.lib.DeepJsonWriter')
+                url : '/matches'
             }
     }
 });
