@@ -361,6 +361,30 @@ describe('Model.Match', function(){
 
             });
 
+            it('should not let the user who gave up any drawing to guess or draw', function(done){
+
+                Match.prepareMatchesForUser(friend4.id, function(results){
+
+                    var gaveUpMatch = _.find(results, function(result){
+                        return match4.id == result.id;
+
+                    });
+
+
+                    expect(gaveUpMatch).to.eql({
+                        id: match4.id,
+                        external_friend: {
+                            name: user.name,
+                            xid: user.identities[0].xid,
+                            source: user.identities[0].source
+                        }
+                    });
+
+                    done();
+
+                });
+
+            });
 
             it('should let the drawer see his friend gave up on the drawing along with the new drawing to guess', function(done){
 
