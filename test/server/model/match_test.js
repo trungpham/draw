@@ -331,6 +331,69 @@ describe('Model.Match', function(){
                 });
 
             });
+
+            it('should let the drawer see his friend gave up on the drawing', function(done){
+
+                Match.prepareMatchesForUser(user.id, function(results){
+
+                    var fourthMatch = _.find(results, function(result){
+                        return match4.id == result.id;
+
+                    });
+
+
+                    expect(fourthMatch).to.eql({
+                        id: match4.id,
+                        external_friend: {
+                            name: friend4.name,
+                            xid: friend4.identities[0].xid,
+                            source: friend4.identities[0].source
+                        },
+                        drawing_to_playback: {
+                            id: match4drawing1.id,
+                            turn: parseInt(match4drawing1.turn)
+                        }
+                    });
+
+                    done();
+
+                });
+
+            });
+
+
+            it('should let the drawer see his friend gave up on the drawing along with the new drawing to guess', function(done){
+
+                Match.prepareMatchesForUser(user.id, function(results){
+
+                    var fifthMatch = _.find(results, function(result){
+                        return match5.id == result.id;
+
+                    });
+
+
+                    expect(fifthMatch).to.eql({
+                        id: match5.id,
+                        external_friend: {
+                            name: friend5.name,
+                            xid: friend5.identities[0].xid,
+                            source: friend5.identities[0].source
+                        },
+                        drawing_to_playback: {
+                            id: match5drawing1.id,
+                            turn: parseInt(match5drawing1.turn)
+                        },
+                        drawing_to_guess: {
+                            id: match5drawing2.id,
+                            turn: parseInt(match5drawing2.turn)
+                        }
+                    });
+
+                    done();
+
+                });
+
+            });
         });
 
     });

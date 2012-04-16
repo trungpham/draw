@@ -133,7 +133,7 @@ MatchSchema.statics.prepareMatchesForUser = function (userId, cb) {
 
 
                     }else{ // then it must be my drawing
-                        if (drawing.state == 'guessed'){
+                        if (drawing.state == 'guessed' || drawing.state == 'forfeited'){
 
                             result.drawing_to_playback = {
                                 id: drawing.id,
