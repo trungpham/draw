@@ -25,7 +25,7 @@ Ext.define('D.model.Match', {
                 name: 'gameStats', model: 'D.model.GameStats'
             },
             {
-                name: 'externalFriend', model: 'D.model.ExternalFriend' //the friend who was invited to play with
+                name: 'externalFriend', model: 'D.model.ExternalFriend', associationKey: 'external_friend' //the friend who was invited to play with
             }
         ],
         proxy: {
