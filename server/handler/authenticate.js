@@ -1,19 +1,15 @@
-var createMatchFromPendingDrawing = function(){
-
-};
-
 var signUserInAndResponse = function(req, res, user){
     req.session.userId = user.id;
     res.setHeader('Content-Type', 'application/json');
     res.end(JSON.stringify(user.toAuthableJSON()));
 };
 
+var User = require(process.cwd() + '/server/model/user');
+var Match =  require(process.cwd() + '/server/model/match');
 module.exports = {
     fbSignedRequest:function (req, res) {
         var SignedRequest = require(process.cwd() + '/server/lib/fb_signed_request');
         var config = require(process.cwd() + '/config.js');
-
-        var User = require(process.cwd() + '/server/model/user');
 
         SignedRequest.secret = config.facebook.appSecret;
         var signedRequest = new SignedRequest(req.body.signedRequest);
@@ -47,13 +43,17 @@ module.exports = {
 
                                 user.save(function (err) {
                                     if (!err) {
-                                        signUserInAndResponse(req, res, user);
+                                        Match.createMatchesForUser(user, function(){
+                                            signUserInAndResponse(req, res, user);
+                                        });
                                     }
                                 });
 
                             });
                     } else {
-                        signUserInAndResponse(req, res, user);
+                        Match.createMatchesForUser(user, function(){
+                            signUserInAndResponse(req, res, user);
+                        });
                     }
                 });
 

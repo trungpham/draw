@@ -163,4 +163,69 @@ MatchSchema.statics.prepareMatchesForUser = function (userId, cb) {
 
 };
 
+
+MatchSchema.statics.createMatchesForUser = function(user, done){
+
+    var Match = this;
+    var matches;
+    var drawings;
+    async.parallel([
+        function(cb){
+            Match.where('users', user.id).run(function(err, docs){
+                matches = docs;
+                cb();
+            });
+        }, function(cb){
+            Drawing.where('external_friend.xid', user.identities[0].xid).
+                where('external_friend.source', user.identities[0].source).
+                exists('match_id', false).
+                run(function(err, docs){
+                    drawings = docs;
+                    cb();
+                });
+
+
+        }
+
+    ], function(){
+
+        //create matches where user isn't already in one.
+        _.each(drawings, function(drawing, i){
+
+            //is this user and this drawer already in a match
+            var userInMatch = _.find(matches, function(match, i){
+               return _.difference([match.users[0].id, match.users[1].id], [user._id.id, drawing.drawer_id.id]).length == 0;
+            });
+
+            //user is not in any match then create a match for this user
+            if (!userInMatch){
+
+                var newMatch = new Match();
+
+                newMatch.users.push(user.id);
+                newMatch.users.push(drawing.drawer_id);
+
+                newMatch.save(function(err){
+
+                    drawing.match_id = newMatch._id;
+                    drawing.save(function(err){
+
+                    });
+
+                });
+
+
+
+            }
+
+        });
+        done();
+
+    });
+
+
+
+
+};
+
 module.exports = mongoose.model('Match', MatchSchema);

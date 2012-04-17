@@ -4,7 +4,7 @@ module.exports = {
 
     list: function(req, res){
 
-        Match.prepareForUser(req.session.userId, function(matches){
+        Match.prepareMatchesForUser(req.session.userId, function(matches){
             res.json(matches);
         });
 
