@@ -11,8 +11,12 @@ module.exports = {
         drawing.turn = 1;
         drawing.save();
         res.send(drawing);
+    },
+
+    show: function(req, res){
+        Drawing.findById(req.params.id, function(err, drawing){
+            res.json(drawing);
+        });
     }
-
-
 
 };

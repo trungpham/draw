@@ -40,6 +40,8 @@ function routes(app){
     );
 
     app.post('/drawings.json', drawingsHandler.create);
+    app.get('/drawings/:id.json', drawingsHandler.show);
+
 
     app.post('/authenticate/facebook', authenticate.fbSignedRequest);
 

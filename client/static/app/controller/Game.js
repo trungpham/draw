@@ -15,6 +15,9 @@ Ext.define('D.controller.Game', {
             },
             gameView: {
                 submit: 'onSubmitGame'
+            },
+            gameMatchesList: {
+                itemtap: 'onMatchSelected'
             }
         },
         routes: {
@@ -26,7 +29,8 @@ Ext.define('D.controller.Game', {
                 main: '#mainView',
                 friendList: '#friendListView',
                 wordsList: '#wordPickerView list',
-                gameView: '#newGameView'
+                gameView: '#newGameView',
+                gameMatchesList: '#gameMatches list'
         }
     },
 
@@ -108,5 +112,32 @@ Ext.define('D.controller.Game', {
             _this.redirectTo('/');
 
         });
+    },
+
+    /**
+     * What to do when the user picked on a match
+     * Should we let the user guess on the drawing or playback the drawing?
+     *
+     */
+    onMatchSelected: function(view, index, target, record){
+        var Drawing = Ext.ModelMgr.getModel('D.model.Drawing');
+        if (record.get('drawingToGuess')){
+            //send user to the guess view
+            Drawing.load(record.get('drawingToGuess').id, {
+                success: function(drawing){
+
+                    var guess = Ext.create('D.model.Guess', {
+                        letters: ['A', 'B', 'Z', 'D', 'G', 'H', 'A', 'H'],
+                        wordLength: 5
+                    });
+                    guess.setDrawing(drawing);
+                    var guessView = Ext.create('D.view.game.Guess', {record: guess});
+
+                    Ext.Viewport.add(guessView);
+                    Ext.Viewport.setActiveItem(guessView);
+
+                }
+            });
+        }
     }
 });
