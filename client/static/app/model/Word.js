@@ -12,6 +12,10 @@ Ext.define('D.model.Word',{
             {
                 name: 'locale' //the language that this was created in
             }
-        ]
+        ],
+        proxy: {
+                type: 'rest',
+                url : '/words'
+            }
     }
 });

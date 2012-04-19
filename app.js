@@ -23,6 +23,8 @@ var pendingInvitesHandler = require('./server/handler/api/pending_invites');
 
 var matchesHandler = require('./server/handler/matches');
 
+var wordsHandler = require('./server/handler/words');
+
 //connect to the mongoose database
 mongoose.connect('mongodb://localhost/draw_dev');
 
@@ -48,6 +50,8 @@ function routes(app){
     app.get('/api/pendingInvites', pendingInvitesHandler);
 
     app.get('/matches', matchesHandler.list);
+
+    app.get('/words', wordsHandler.list);
 
 };
 
