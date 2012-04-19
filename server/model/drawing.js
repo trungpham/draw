@@ -17,4 +17,53 @@ var DrawingSchema = new Schema({
     state: String //could be drawn/guessed/forfeited
 });
 
+var User = require(process.cwd()+'/server/model/user');
+var Word = require(process.cwd()+'/server/model/word');
+var Guess = require(process.cwd()+'/server/model/guess');
+var Alphabet = require(process.cwd()+'/server/model/alphabet');
+
+DrawingSchema.methods.createGuess = function(user, done){
+    var drawing = this;
+
+    Guess.findOne({drawing_id: this.id, user_id: user.id}).run(function(err, guess){
+
+        if (guess){
+            done(err, guess);
+        }else{
+
+            Word.findById(drawing.word_id).run(function(err, word){
+
+                var letters = word.value.toUpperCase().split('');
+
+                var i;
+                var alphabetSize = Alphabet[word.locale].length;
+                for (i = letters.length; i < 12 ; i++){
+                    letters.push(Alphabet[word.locale][Math.floor(Math.random()*alphabetSize)]);
+                }
+
+                var guess = new Guess({
+                    answer: word.value,
+                    word_length: word.value.length,
+                    letters: letters,
+                      user_id: user.id,
+                      drawing_id: drawing.id
+
+                });
+
+                guess.save(function(err){
+                    done(err, guess);
+                });
+
+            });
+
+        }
+
+    });
+
+
+
+
+
+};
+
 module.exports = mongoose.model('Drawing', DrawingSchema);
