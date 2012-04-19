@@ -71,7 +71,7 @@ Ext.define('D.view.game.Guess', {
 
                 var _this = this;
                 var i;
-                for (i = 0; i < this.getRecord().get('wordLength'); i++) {
+                for (i = 0; i < this.getRecord().get('word_length'); i++) {
                     Ext.getCmp('guessRow').add({
                         id: 'game-board-1-' + i,
                         xtype:'component',

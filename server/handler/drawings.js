@@ -15,7 +15,13 @@ module.exports = {
 
     show: function(req, res){
         Drawing.findById(req.params.id, function(err, drawing){
-            res.json(drawing);
+            drawing.createGuess(req.session.userId, function(err, guess){
+                delete guess.answer; //remove the answer
+
+                drawing.set('guess', guess);
+
+                res.json(drawing);
+            });
         });
     }
 

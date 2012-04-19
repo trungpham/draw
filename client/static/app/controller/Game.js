@@ -126,12 +126,8 @@ Ext.define('D.controller.Game', {
             Drawing.load(record.get('drawingToGuess').id, {
                 success: function(drawing){
 
-                    var guess = Ext.create('D.model.Guess', {
-                        letters: ['A', 'B', 'Z', 'D', 'G', 'H', 'A', 'H'],
-                        wordLength: 5
-                    });
-                    guess.setDrawing(drawing);
-                    var guessView = Ext.create('D.view.game.Guess', {record: guess});
+
+                    var guessView = Ext.create('D.view.game.Guess', {record: drawing.getGuess()});
 
                     Ext.Viewport.add(guessView);
                     Ext.Viewport.setActiveItem(guessView);

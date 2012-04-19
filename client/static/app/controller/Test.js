@@ -16,7 +16,7 @@ Ext.define('D.controller.Test', {
         //guess the word
         var guess = Ext.create('D.model.Guess', {
             letters: ['A', 'B', 'Z', 'D', 'G', 'H', 'A', 'H'],
-            wordLength: 5
+            word_length: 5
         });
         guess.setDrawing(drawing);
         var guessView = Ext.create('D.view.game.Guess', {record: guess});

@@ -1,5 +1,13 @@
 var mongoose = require('mongoose'), Schema = mongoose.Schema, ObjectId = Schema.ObjectId;
 
+var _ = require('underscore');
+
+var User = require(process.cwd()+'/server/model/user');
+var Word = require(process.cwd()+'/server/model/word');
+var Guess = require(process.cwd()+'/server/model/guess');
+var Alphabet = require(process.cwd()+'/server/model/alphabet');
+
+
 var DrawingSchema = new Schema({
     created_time: { type: Date, default: Date.now },
     data: Array,
@@ -16,11 +24,6 @@ var DrawingSchema = new Schema({
     turn: Number, //what turn this drawing is on
     state: String //could be drawn/guessed/forfeited
 });
-
-var User = require(process.cwd()+'/server/model/user');
-var Word = require(process.cwd()+'/server/model/word');
-var Guess = require(process.cwd()+'/server/model/guess');
-var Alphabet = require(process.cwd()+'/server/model/alphabet');
 
 DrawingSchema.methods.createGuess = function(userId, done){
     var drawing = this;
@@ -44,7 +47,7 @@ DrawingSchema.methods.createGuess = function(userId, done){
                 var guess = new Guess({
                     answer: word.value,
                     word_length: word.value.length,
-                    letters: letters,
+                    letters: _.shuffle(letters),
                       user_id: userId,
                       drawing_id: drawing.id
 

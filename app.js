@@ -66,6 +66,7 @@ ss.client.templateEngine.use(require('ss-hogan'));
 // Minimize and pack assets if you type: SS_ENV=production node app.js
 if (ss.env == 'production') ss.client.packAssets();
 
+mongoose.set('debug', true);
 
 var app = express.createServer(
     ss.http.middleware,

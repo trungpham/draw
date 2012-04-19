@@ -17,7 +17,7 @@ Ext.define('D.model.Guess', {
                 **/
             },
             {
-                name: 'wordLength', type: 'int'
+                name: 'word_length', type: 'int'
             }
         ],
         belongsTo: [
@@ -41,7 +41,7 @@ Ext.define('D.model.Guess', {
         //set the game board
         this.gameBoard = [
             [], //randome letters
-            new Array(this.get('wordLength'))  //guessing area
+            new Array(this.get('word_length'))  //guessing area
         ];
 
         this.gameLetters = [];
@@ -72,7 +72,7 @@ Ext.define('D.model.Guess', {
 
         }else if(coordinates[0] === 1 ){
             //second row
-            if (coordinates[1] < 0 || coordinates[1] >= this.get('wordLength')){
+            if (coordinates[1] < 0 || coordinates[1] >= this.get('word_length')){
                 throw 'Out of bound move';
             }
         }else{
