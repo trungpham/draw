@@ -22,10 +22,10 @@ var Word = require(process.cwd()+'/server/model/word');
 var Guess = require(process.cwd()+'/server/model/guess');
 var Alphabet = require(process.cwd()+'/server/model/alphabet');
 
-DrawingSchema.methods.createGuess = function(user, done){
+DrawingSchema.methods.createGuess = function(userId, done){
     var drawing = this;
 
-    Guess.findOne({drawing_id: this.id, user_id: user.id}).run(function(err, guess){
+    Guess.findOne({drawing_id: this.id, user_id: userId}).run(function(err, guess){
 
         if (guess){
             done(err, guess);
@@ -45,7 +45,7 @@ DrawingSchema.methods.createGuess = function(user, done){
                     answer: word.value,
                     word_length: word.value.length,
                     letters: letters,
-                      user_id: user.id,
+                      user_id: userId,
                       drawing_id: drawing.id
 
                 });

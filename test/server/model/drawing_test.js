@@ -59,7 +59,7 @@ describe('Server.Model.Drawing', function(){
 
         it('should create a guess for the user', function(done){
 
-            drawing.createGuess(guesser, function(err, guess){
+            drawing.createGuess(guesser.id, function(err, guess){
 
                 expect(guess.word_length.toString()).to.eql(4);
                 expect(guess.answer).to.eql('tesk');
@@ -77,9 +77,9 @@ describe('Server.Model.Drawing', function(){
 
         it('should not create another guess for the same user', function(done){
 
-            drawing.createGuess(guesser, function(err, guess1){
+            drawing.createGuess(guesser.id, function(err, guess1){
 
-                drawing.createGuess(guesser, function(err, guess2){
+                drawing.createGuess(guesser.id, function(err, guess2){
 
                     expect(guess1).not.to.be(null);
                     expect(guess1.id).to.eql(guess2.id);
