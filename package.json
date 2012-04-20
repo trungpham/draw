@@ -6,15 +6,15 @@
   "private": true,
   "engines": { "node": ">= 0.6.0" },
   "dependencies": {
-    "socketstream": "https://github.com/socketstream/socketstream/tarball/master",
     "async": "latest",
       "express": "latest",
       "livereload": "latest",
       "mongoose": "latest",
       "underscore": "latest",
-    "ss-coffee": "0.1.x",
-    "ss-stylus": "0.1.x",
-    "ss-jade": "0.1.x",
-    "ss-hogan": "0.1.x"
+    "ss-coffee": "latest",
+    "ss-stylus": "latest",
+    "ss-jade": "latest",
+    "ss-hogan": "latest",
+      "socketstream": "https://github.com/socketstream/socketstream/tarball/master"
   }
 }
