@@ -6,6 +6,7 @@
   "private": true,
   "engines": { "node": ">= 0.6.0" },
   "dependencies": {
+    "socketstream": "https://github.com/socketstream/socketstream.git",
     "ss-coffee": "0.1.x",
     "ss-stylus": "0.1.x",
     "ss-jade": "0.1.x",
