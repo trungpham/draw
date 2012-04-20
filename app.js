@@ -6,6 +6,8 @@ var ss = require('socketstream'),
     mongoose = require('mongoose');
 
 
+ss.client.set({liveReload: false});
+
 //overriding toJSON
 var oldToJSON = mongoose.Document.prototype.toJSON;
 
