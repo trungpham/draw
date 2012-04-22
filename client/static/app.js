@@ -9,6 +9,7 @@ Ext.application({
 
     requires: [
         'Ext.MessageBox',
+        'Ext.Viewport',
         'D.lib.Authentication',
         'D.lib.DeepJsonWriter'
     ],
