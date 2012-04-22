@@ -9,7 +9,8 @@ Ext.application({
 
     requires: [
         'Ext.MessageBox',
-        'D.lib.Authentication'
+        'D.lib.Authentication',
+        'D.lib.DeepJsonWriter'
     ],
     models: ['User', 'ExternalFriend', 'Drawing', 'Guess'],
     views: ['Main', 'FriendPicker', 'game.New'],

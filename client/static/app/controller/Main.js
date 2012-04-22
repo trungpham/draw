@@ -1,5 +1,6 @@
 Ext.define('D.controller.Main', {
     extend: 'Ext.app.Controller',
+    requires: ['D.store.Matches', 'D.store.PendingInvites'],
     config: {
 
     },

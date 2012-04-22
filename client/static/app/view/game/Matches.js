@@ -14,7 +14,7 @@ Ext.define("D.view.game.Matches", {
             {
                 xtype:'list',
                 scrollable: false,
-                itemTpl: '<img width="50" height="50" src="http://graph.facebook.com/{externalFriend.xid}/picture"/> <strong>{externalFriend.name}</strong>',
+                itemTpl: '<img width="50" height="50" src="http://graph.facebook.com/<tpl for="externalFriend">{xid}</tpl>/picture"/> <strong><tpl for="externalFriend">{externalFriend}</tpl>name</strong>',
                 store: 'matches',
                 emptyText:'You have not created any game yet'
             }
