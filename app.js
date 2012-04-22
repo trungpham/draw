@@ -8,6 +8,15 @@ var ss = require('socketstream'),
 
 ss.client.set({liveReload: false});
 
+if (process.env.NODE_ENV == 'production'){
+    ss.client.set({dirs: {static: '/client/static/build/production'}});
+    mongoose.connect(process.env.MONGOLAB_URI);
+}else {
+
+    //connect to the mongoose database
+    mongoose.connect('mongodb://localhost/draw_dev');
+}
+
 //overriding toJSON
 var oldToJSON = mongoose.Document.prototype.toJSON;
 
@@ -27,8 +36,6 @@ var matchesHandler = require('./server/handler/matches');
 
 var wordsHandler = require('./server/handler/words');
 
-//connect to the mongoose database
-mongoose.connect('mongodb://localhost/draw_dev');
 
 // Define a single-page client
 ss.client.define('main', {
