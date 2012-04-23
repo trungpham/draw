@@ -1,5 +1,5 @@
 Ext.define('D.controller.Game', {
-    requires: ['Ext.dataview.List', 'D.view.FriendPicker'],
+    requires: ['Ext.dataview.List', 'D.view.FriendPicker', 'D.store.Words', 'D.view.game.WordPicker'],
     extend: 'Ext.app.Controller',
     config: {
         control:{
