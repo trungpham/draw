@@ -15,6 +15,7 @@
     "ss-stylus": "latest",
     "ss-jade": "latest",
     "ss-hogan": "latest",
+      "ejs": "latest",
       "socketstream": "https://github.com/socketstream/socketstream/tarball/master"
   }
 }

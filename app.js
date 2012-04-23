@@ -36,6 +36,7 @@ var matchesHandler = require('./server/handler/matches');
 
 var wordsHandler = require('./server/handler/words');
 
+var appHandler = require('./server/handler/app');
 
 // Define a single-page client
 ss.client.define('main', {
@@ -61,6 +62,9 @@ function routes(app){
     app.get('/matches', matchesHandler.list);
 
     app.get('/words', wordsHandler.list);
+
+    app.get('/draw', appHandler.index);
+    app.post('/draw', appHandler.index);
 
 };
 
