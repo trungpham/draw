@@ -36,6 +36,9 @@ var matchesHandler = require('./server/handler/matches');
 
 var wordsHandler = require('./server/handler/words');
 
+var guessesHandler = require('./server/handler/guesses');
+
+
 var appHandler = require('./server/handler/app');
 
 // Define a single-page client
@@ -65,6 +68,8 @@ function routes(app){
 
     app.get('/draw', appHandler.index);
     app.post('/draw', appHandler.index);
+
+    app.post('/guess/check', guessesHandler.check);
 
 };
 

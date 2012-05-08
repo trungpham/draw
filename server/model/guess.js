@@ -13,4 +13,16 @@ var GuessSchema = new Schema({
 });
 
 
+
+GuessSchema.methods.verify = function(letters, callback){
+
+    if (letters.toUpperCase() == this.answer.toUpperCase()){
+        callback(null, 'CORRECT');
+
+    }else{
+        callback(null, 'INCORRECT');
+    }
+
+};
+
 module.exports = mongoose.model('Guess', GuessSchema);

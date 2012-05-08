@@ -84,8 +84,42 @@ Ext.define('D.model.Guess', {
         this.gameBoard[coordinates[0]][coordinates[1]] = letter;
         this.gameLetters[letter].row = coordinates[0];
         this.gameLetters[letter].col = coordinates[1];
+
+        //if the board is fully populated then we should check the server for the right answer
+
+        var activeLetters = this.getActiveLetters();
+        if (activeLetters.length == this.gameBoard[1].length){
+            this.checkAnswer(activeLetters);
+        }
+
     },
 
+    getActiveLetters: function(){
+        var i;
+        var letters = '';
+        for (i=0; i< this.gameBoard[1].length; i++){
+            if (Ext.isDefined(this.gameBoard[1][i])){
+                letters += this.gameLetters[this.gameBoard[1][i]].value;
+            }
+        }
+        return letters;
+    },
+    checkAnswer: function(activeLetters){
+        var currentAction = this._currentAction;
+        var currentLength = this.get('data')[this._currentAction].length;
+
+        Ext.Ajax.request({
+            url: '/guess/check',
+            params: {
+                id: this.getId(),
+                letters: activeLetters
+            },
+            success: function(response){
+                console.log(response);
+            }
+        });
+
+    },
     _addMove: function(move){
         var data = this.get('data');
 
