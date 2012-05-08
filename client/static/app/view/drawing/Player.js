@@ -46,7 +46,7 @@ Ext.define('D.view.drawing.Player', {
             if (scope._skipped){
                 scope._drawLoop(scope);
             }else{
-                setTimeout(scope._drawLoop, D.view.drawing.Player.DRAW_INTERVAL, scope);
+                setTimeout(scope._drawLoop, scope.self.DRAW_INTERVAL, scope);
             }
         }
 
