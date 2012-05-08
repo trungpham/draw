@@ -133,7 +133,7 @@ Ext.define('D.view.game.Guess', {
                                         var dropped = false;
                                         Ext.select('.slot').each(function(el, c, index){
 
-                                            var distance = D.lib.Math.distance(el.getXY(), letterElement.getXY());
+                                            var distance = window.D.lib.Math.distance(el.getXY(), letterElement.getXY());
 
                                             if (distance < 10){
                                                 var slotCmp = Ext.getCmp(el.getId());
@@ -152,7 +152,7 @@ Ext.define('D.view.game.Guess', {
                                         });
 
                                         Ext.select('.letterHolder').each(function(el, c, index){
-                                            var distance = D.lib.Math.distance(el.getXY(), letterElement.getXY());
+                                            var distance = window.D.lib.Math.distance(el.getXY(), letterElement.getXY());
 
                                                   if (distance < 10){
 
