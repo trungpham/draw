@@ -11,10 +11,11 @@ Ext.application({
         'Ext.MessageBox',
         'Ext.Viewport',
         'D.lib.Authentication',
-        'D.lib.DeepJsonWriter'
+        'D.lib.DeepJsonWriter',
+        'D.lib.Math'
     ],
     models: ['User', 'ExternalFriend', 'Drawing', 'Guess'],
-    views: ['Main', 'FriendPicker', 'game.New'],
+    views: ['Main', 'FriendPicker', 'game.New', 'game.Guess'],
     controllers: ['Main', 'Game', 'Test'],
 
     icon: {
