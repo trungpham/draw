@@ -17,6 +17,23 @@ module.exports = {
             }
 
         });
+    },
+    record: function(req, res){
+
+        Guess.findById(req.params.id, function(err, guess){
+
+            if (guess){
+
+                guess.record(req.body.data, function(err, result){
+
+                    res.json({status: 'SUCCESS'});
+
+                });
+
+            }
+
+        });
+
     }
 
 };

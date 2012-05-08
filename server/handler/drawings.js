@@ -16,8 +16,8 @@ module.exports = {
     show: function(req, res){
         Drawing.findById(req.params.id, function(err, drawing){
             drawing.createGuess(req.session.userId, function(err, guess){
-                delete guess.answer; //remove the answer
-
+                guess.answer = undefined; //remove the answer
+                guess.data = undefined; //remove the data
                 drawing.set('guess', guess);
 
                 res.json(drawing);

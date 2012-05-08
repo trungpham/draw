@@ -114,9 +114,35 @@ Ext.define('D.model.Guess', {
                 id: this.getId(),
                 letters: activeLetters
             },
-            success: function(response){
+            success: function(xhr){
+                var response = Ext.decode(xhr.responseText);
+
+                if (response.status == 'CORRECT'){
+                    this.record();
+                }
+            },
+            scope: this
+        });
+
+    },
+
+    /**
+     * record the guess for playback
+     * let the backend do the filtering
+     *
+     */
+    record: function(){
+
+        Ext.Ajax.request({
+            url: '/guess/'+this.getId()+'/record',
+            jsonData: {
+                data: this.get('data')
+            },
+            success: function(xhr){
+                var response = Ext.decode(xhr.responseText);
                 console.log(response);
-            }
+            },
+            scope: this
         });
 
     },

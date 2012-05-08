@@ -25,4 +25,15 @@ GuessSchema.methods.verify = function(letters, callback){
 
 };
 
+GuessSchema.methods.record = function(data, callback){
+
+    this.data = data;
+
+    this.save(function(err){
+
+        callback(err);
+    });
+
+};
+
 module.exports = mongoose.model('Guess', GuessSchema);

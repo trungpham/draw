@@ -70,6 +70,7 @@ function routes(app){
     app.post('/draw', appHandler.index);
 
     app.post('/guess/check', guessesHandler.check);
+    app.post('/guess/:id/record', guessesHandler.record);
 
 };
 
