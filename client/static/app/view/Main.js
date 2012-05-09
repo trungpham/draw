@@ -1,5 +1,5 @@
-Ext.define("D.view.Main", {
-    requires: ['D.view.PendingInvites', 'D.view.game.Matches'],
+Ext.define("Draw.view.Main", {
+    requires: ['Draw.view.PendingInvites', 'Draw.view.game.Matches'],
     id:'mainView',
     extend:'Ext.navigation.View',
     config:

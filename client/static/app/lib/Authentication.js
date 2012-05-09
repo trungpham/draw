@@ -1,5 +1,5 @@
-Ext.define('D.lib.Authentication', {
-    requires: ['Ext.Ajax', 'D.model.User'],
+Ext.define('Draw.lib.Authentication', {
+    requires: ['Ext.Ajax', 'Draw.model.User'],
     /***
      * Check to see if there user is valida
      * @param {function} callback function
@@ -20,7 +20,7 @@ Ext.define('D.lib.Authentication', {
                         params: response.authResponse
                         ,
                         success: function(data){
-                            _this.currentUser = Ext.create('D.model.User',  Ext.JSON.decode(data.responseText));
+                            _this.currentUser = Ext.create('Draw.model.User',  Ext.JSON.decode(data.responseText));
                             callback(_this.currentUser);
                             Ext.Viewport.setMasked(false);
 

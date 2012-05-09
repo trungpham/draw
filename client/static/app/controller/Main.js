@@ -1,21 +1,21 @@
-Ext.define('D.controller.Main', {
+Ext.define('Draw.controller.Main', {
     extend: 'Ext.app.Controller',
-    requires: ['D.store.Matches', 'D.store.PendingInvites'],
+    requires: ['Draw.store.Matches', 'Draw.store.PendingInvites'],
     config: {
 
     },
 
     launch: function(){
 
-        var pendingInvitesStore = Ext.create('D.store.PendingInvites', {
+        var pendingInvitesStore = Ext.create('Draw.store.PendingInvites', {
             id: 'pendingInvites'
         });
 
-        var matchesStore = Ext.create('D.store.Matches', {
+        var matchesStore = Ext.create('Draw.store.Matches', {
             id: 'matches'
         });
 
-        var mainView = Ext.create('D.view.Main');
+        var mainView = Ext.create('Draw.view.Main');
 
         matchesStore.load();
 

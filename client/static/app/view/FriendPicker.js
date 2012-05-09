@@ -1,4 +1,4 @@
-Ext.define("D.view.FriendPicker", {
+Ext.define("Draw.view.FriendPicker", {
     //id: 'friendPickerView',
     id: 'friendListView',
     extend: 'Ext.List',

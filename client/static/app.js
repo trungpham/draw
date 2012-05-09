@@ -5,14 +5,14 @@ Ext.Loader.setPath({
 //</debug>
 
 Ext.application({
-    name: 'D',
+    name: 'Draw',
 
     requires: [
         'Ext.MessageBox',
         'Ext.Viewport',
-        'D.lib.Authentication',
-        'D.lib.DeepJsonWriter',
-        'D.lib.Math'
+        'Draw.lib.Authentication',
+        'Draw.lib.DeepJsonWriter',
+        'Draw.lib.Math'
     ],
     models: ['User', 'ExternalFriend', 'Drawing', 'Guess'],
     views: ['Main', 'FriendPicker', 'game.New', 'game.Guess'],
@@ -33,7 +33,7 @@ Ext.application({
         Ext.fly('appLoadingIndicator').destroy();
 
         // create an instance of the authentication
-        D.auth = Ext.create('D.lib.Authentication');
+        Draw.auth = Ext.create('Draw.lib.Authentication');
 
 
     },

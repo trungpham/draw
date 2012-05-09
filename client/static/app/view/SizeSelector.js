@@ -1,4 +1,4 @@
-Ext.define('D.view.SizeSelector', {
+Ext.define('Draw.view.SizeSelector', {
     extend: 'Ext.Panel',
     xtype:'sizeselector',
     currentSize: 'tiny',

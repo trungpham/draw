@@ -1,6 +1,6 @@
-Ext.define('D.view.game.Guess', {
+Ext.define('Draw.view.game.Guess', {
     extend:'Ext.Container',
-    requires: ['D.lib.Math', 'D.view.drawing.Player'],
+    requires: ['Draw.lib.Math', 'Draw.view.drawing.Player'],
     config:{
         layout:'vbox',
         items:[
@@ -133,7 +133,7 @@ Ext.define('D.view.game.Guess', {
                                         var dropped = false;
                                         Ext.select('.slot').each(function(el, c, index){
 
-                                            var distance = window.D.lib.Math.distance(el.getXY(), letterElement.getXY());
+                                            var distance = Draw.lib.Math.distance(el.getXY(), letterElement.getXY());
 
                                             if (distance < 10){
                                                 var slotCmp = Ext.getCmp(el.getId());
@@ -152,7 +152,7 @@ Ext.define('D.view.game.Guess', {
                                         });
 
                                         Ext.select('.letterHolder').each(function(el, c, index){
-                                            var distance = window.D.lib.Math.distance(el.getXY(), letterElement.getXY());
+                                            var distance = Draw.lib.Math.distance(el.getXY(), letterElement.getXY());
 
                                                   if (distance < 10){
 

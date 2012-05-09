@@ -1,6 +1,6 @@
-Ext.define('D.view.game.PlayBack', {
+Ext.define('Draw.view.game.PlayBack', {
     extend: 'Ext.Container',
-    requires: ['D.view.drawing.Player'],
+    requires: ['Draw.view.drawing.Player'],
     config: {
         layout:'vbox',
         items:[

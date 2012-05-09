@@ -1,4 +1,4 @@
-Ext.define('D.model.Word',{
+Ext.define('Draw.model.Word',{
     extend: 'Ext.data.Model',
     config: {
         fields: [{

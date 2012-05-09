@@ -1,4 +1,4 @@
-Ext.define("D.view.PendingInvites", {
+Ext.define("Draw.view.PendingInvites", {
     xtype:'pendinginvites',
     extend:'Ext.Container',
     config:{

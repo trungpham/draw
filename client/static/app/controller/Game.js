@@ -1,5 +1,5 @@
-Ext.define('D.controller.Game', {
-    requires: ['Ext.dataview.List', 'D.view.FriendPicker', 'D.store.Words', 'D.view.game.WordPicker', 'D.view.game.Guess'],
+Ext.define('Draw.controller.Game', {
+    requires: ['Ext.dataview.List', 'Draw.view.FriendPicker', 'Draw.store.Words', 'Draw.view.game.WordPicker', 'Draw.view.game.Guess'],
     extend: 'Ext.app.Controller',
     config: {
         control:{
@@ -37,7 +37,7 @@ Ext.define('D.controller.Game', {
     'new': function(){
         //check to see if user is logged in
         var _this = this;
-        D.auth.requireLogin(function(user){
+        Draw.auth.requireLogin(function(user){
 
             //get a list of friends
             user.fetchFriends();
@@ -49,7 +49,7 @@ Ext.define('D.controller.Game', {
 
     },
     pickFriend: function(){
-        var friendPicker = Ext.create('D.view.FriendPicker');
+        var friendPicker = Ext.create('Draw.view.FriendPicker');
         friendPicker.setStore(Ext.getStore('userFriendsStore'));
         this.getMain().push(friendPicker);
     },
@@ -62,17 +62,17 @@ Ext.define('D.controller.Game', {
     //pick the word that we want to draw
     pickWord: function(){
         //retrieve a set of words that this user has not yet drawn
-        var words = Ext.create('D.store.Words', {
+        var words = Ext.create('Draw.store.Words', {
             storeId: 'wordsStore'
         });
 
-        var wordPicker = Ext.create('D.view.game.WordPicker');
+        var wordPicker = Ext.create('Draw.view.game.WordPicker');
         wordPicker.child('list').setStore(words);
 
         this.getMain().push(wordPicker);
 
         words.load({
-            params: {filter_words_drawn_by: D.auth.currentUser.get('id')},
+            params: {filter_words_drawn_by: Draw.auth.currentUser.get('id')},
             callback: function(words){
 
             }
@@ -85,10 +85,10 @@ Ext.define('D.controller.Game', {
     drawForFriend: function(friendId, wordId){
         var word = Ext.getStore('wordsStore').getById(wordId);
         var friend = Ext.getStore('userFriendsStore').getById(friendId);
-        var drawing = Ext.create('D.model.Drawing');
+        var drawing = Ext.create('Draw.model.Drawing');
         drawing.setWord(word);
         drawing.setExternalFriend(friend);
-        var gameView = Ext.create('D.view.game.New', {data: {word: word, friend: friend, drawing: drawing}});
+        var gameView = Ext.create('Draw.view.game.New', {data: {word: word, friend: friend, drawing: drawing}});
 
 
         Ext.Viewport.add(gameView);
@@ -120,14 +120,14 @@ Ext.define('D.controller.Game', {
      *
      */
     onMatchSelected: function(view, index, target, record){
-        var Drawing = Ext.ModelMgr.getModel('D.model.Drawing');
+        var Drawing = Ext.ModelMgr.getModel('Draw.model.Drawing');
         if (record.get('drawingToGuess')){
             //send user to the guess view
             Drawing.load(record.get('drawingToGuess').id, {
                 success: function(drawing){
 
 
-                    var guessView = Ext.create('D.view.game.Guess', {record: drawing.getGuess()});
+                    var guessView = Ext.create('Draw.view.game.Guess', {record: drawing.getGuess()});
 
                     Ext.Viewport.add(guessView);
                     Ext.Viewport.setActiveItem(guessView);

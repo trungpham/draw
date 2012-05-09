@@ -1,4 +1,4 @@
-Ext.define('D.model.ExternalFriend', {
+Ext.define('Draw.model.ExternalFriend', {
     extend: 'Ext.data.Model',
     config: {
         fields: [

@@ -1,4 +1,4 @@
-Ext.define("D.view.Canvas", {
+Ext.define("Draw.view.Canvas", {
     extend: 'Ext.Component',
     xtype: 'canvas',
     config: {

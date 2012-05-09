@@ -1,4 +1,4 @@
-Ext.define("D.view.game.Matches", {
+Ext.define("Draw.view.game.Matches", {
     xtype:'gamematches',
     extend:'Ext.Container',
     config:{

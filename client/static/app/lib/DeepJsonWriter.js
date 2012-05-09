@@ -1,4 +1,4 @@
-Ext.define('D.lib.DeepJsonWriter', {
+Ext.define('Draw.lib.DeepJsonWriter', {
     extend:'Ext.data.writer.Json',
     cleanUpData: function(data, phantom){
 

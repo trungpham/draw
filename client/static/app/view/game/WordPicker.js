@@ -1,4 +1,4 @@
-Ext.define("D.view.game.WordPicker", {
+Ext.define("Draw.view.game.WordPicker", {
     id: 'wordPickerView',
     extend: 'Ext.Container',
     config: {

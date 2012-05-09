@@ -1,4 +1,4 @@
-Ext.define('D.model.User', {
+Ext.define('Draw.model.User', {
     requires: ['Ext.data.Store'],
     extend:'Ext.data.Model',
     config:{
@@ -9,7 +9,7 @@ Ext.define('D.model.User', {
         ],
 
 //        hasMany:{
-//            model:'D.model.ExternalFriend',
+//            model:'Draw.model.ExternalFriend',
 //            name:'friends',
 //            store:{
 //                sorters:'lastName',
@@ -31,7 +31,7 @@ Ext.define('D.model.User', {
 
                 Ext.create('Ext.data.Store', {
                     storeId: 'userFriendsStore',
-                    model: 'D.model.ExternalFriend',
+                    model: 'Draw.model.ExternalFriend',
                     data: Ext.Array.map(result.data, function(friend){
 
                         return {xid: friend.id, name: friend.name, source: 'fb'}

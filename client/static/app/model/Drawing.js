@@ -1,11 +1,11 @@
-Ext.define('D.model.Drawing',{
+Ext.define('Draw.model.Drawing',{
     extend: 'Ext.data.Model',
     config: {
         proxy: {
                 type: 'rest',
                 url : 'drawings',
                 format: 'json',
-                writer: Ext.create('D.lib.DeepJsonWriter')
+                writer: Ext.create('Draw.lib.DeepJsonWriter')
         },
 
         fields: [
@@ -33,21 +33,21 @@ Ext.define('D.model.Drawing',{
         ],
         belongsTo:[
             {
-                name: 'drawer', model: 'D.model.User'
+                name: 'drawer', model: 'Draw.model.User'
             },
             {
-                name: 'match', model: 'D.model.Match'
+                name: 'match', model: 'Draw.model.Match'
             },
             {
-                name: 'word', model: 'D.model.Word'
+                name: 'word', model: 'Draw.model.Word'
             }
         ],
         hasOne: [
             {
-                name: 'guess', model: 'D.model.Guess'
+                name: 'guess', model: 'Draw.model.Guess'
             },
             {
-                name: 'external_friend', model: 'D.model.ExternalFriend'
+                name: 'external_friend', model: 'Draw.model.ExternalFriend'
             }
         ]
 

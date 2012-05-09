@@ -1,4 +1,4 @@
-Ext.define('D.lib.Math', {
+Ext.define('Draw.lib.Math', {
     statics: {
         distance: function(point1, point2){
             return Math.sqrt(

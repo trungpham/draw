@@ -1,5 +1,5 @@
 //this view will play back the raw drawing
-Ext.define('D.view.drawing.Player', {
+Ext.define('Draw.view.drawing.Player', {
     extend: 'Ext.Container',
     xtype: 'drawingplayer',
     config: {

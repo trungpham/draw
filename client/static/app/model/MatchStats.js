@@ -1,4 +1,4 @@
-Ext.define('D.model.MatchState', {
+Ext.define('Draw.model.MatchState', {
     extend: 'Ext.data.Model',
     config: {
         fields: [

@@ -1,7 +1,7 @@
-Ext.define('D.store.Words', {
+Ext.define('Draw.store.Words', {
     extend: 'Ext.data.Store',
-    requires: 'D.model.Word',
+    requires: 'Draw.model.Word',
     config: {
-        model: 'D.model.Word'
+        model: 'Draw.model.Word'
     }
 });

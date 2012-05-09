@@ -1,4 +1,4 @@
-Ext.define('D.model.Guess', {
+Ext.define('Draw.model.Guess', {
     extend: 'Ext.data.Model',
     config: {
         fields: [
@@ -22,10 +22,10 @@ Ext.define('D.model.Guess', {
         ],
         belongsTo: [
             {
-                name: 'drawing', model: 'D.model.Drawing'
+                name: 'drawing', model: 'Draw.model.Drawing'
             },
             {
-                name: 'word', model: 'D.model.Word'
+                name: 'word', model: 'Draw.model.Word'
             }
         ]
     },

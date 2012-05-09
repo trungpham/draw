@@ -1,4 +1,4 @@
-Ext.define('D.model.Match', {
+Ext.define('Draw.model.Match', {
     extend: 'Ext.data.Model',
     config: {
         fields: [
@@ -16,22 +16,22 @@ Ext.define('D.model.Match', {
         ],
         hasMany: [
             {
-            model: 'D.model.Drawing', name: 'drawings' , associationKey: 'drawings'
+            model: 'Draw.model.Drawing', name: 'drawings' , associationKey: 'drawings'
         },
-            {model: 'D.model.User', name: 'users'} //users who are playing in this game
+            {model: 'Draw.model.User', name: 'users'} //users who are playing in this game
         ],
         hasOne: [
             {
-                name: 'gameStats', model: 'D.model.GameStats'
+                name: 'gameStats', model: 'Draw.model.GameStats'
             },
             {
-                name: 'externalFriend', model: 'D.model.ExternalFriend', associationKey: 'external_friend' //the friend who was invited to play with
+                name: 'externalFriend', model: 'Draw.model.ExternalFriend', associationKey: 'external_friend' //the friend who was invited to play with
             },
             {
-                name: 'drawingToGuess', model: 'D.model.Drawing', associationKey: 'drawing_to_guess'
+                name: 'drawingToGuess', model: 'Draw.model.Drawing', associationKey: 'drawing_to_guess'
             },
             {
-                name: 'drawingToPlayback', model: 'D.model.Drawing', associationKey: 'drawing_to_playback'
+                name: 'drawingToPlayback', model: 'Draw.model.Drawing', associationKey: 'drawing_to_playback'
             }
         ],
         proxy: {

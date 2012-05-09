@@ -1,4 +1,4 @@
-Ext.define('D.model.Color',{
+Ext.define('Draw.model.Color',{
     extend: 'Ext.data.Model',
     config: {
         fields: [{

@@ -1,6 +1,6 @@
-Ext.define("D.view.game.New", {
+Ext.define("Draw.view.game.New", {
     id:'newGameView',
-    requires: ['D.view.Canvas'],
+    requires: ['Draw.view.Canvas'],
     extend:'Ext.Container',
     config: {
         fullscreen: true,
@@ -124,7 +124,7 @@ Ext.define("D.view.game.New", {
         //create if not there yet
 
         if (!this.penSizeSelector) {
-            this.penSizeSelector = Ext.create('D.view.SizeSelector');
+            this.penSizeSelector = Ext.create('Draw.view.SizeSelector');
 
 //            this.penSizeSelector = Ext.create('Ext.Panel', {
 //                id:'penSizeSelector',
@@ -171,7 +171,7 @@ Ext.define("D.view.game.New", {
     },
     onEraser: function(e){
         if (!this.eraserSizeSelector) {
-            this.eraserSizeSelector = Ext.create('D.view.SizeSelector');
+            this.eraserSizeSelector = Ext.create('Draw.view.SizeSelector');
         }
         this.eraserSizeSelector.showBy(this.query('#eraser')[0]);
     }
